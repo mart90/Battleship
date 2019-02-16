@@ -10,21 +10,28 @@ namespace MBRD.Entities
     {
         public int Width { get; set; }
         public int Height { get; set; }
+        public int HorizontalOffset { get; set; }
+        public int VerticalOffset { get; set; }
+        public int TileSize { get; set; }
         public List<List<IPlaceable>> TileSet { get; set; }
 
         private const int GridSpacing = 1;
+        private const int PlayerGridSpacing = 10;
 
-        public Grid(int width, int height, int tileSize)
+        public Grid(int width, int height, int tileSize, int horizontalOffset = 0, int verticalOffset = 0)
         {
             Width = width;
             Height = height;
+            TileSize = tileSize;
+            HorizontalOffset = horizontalOffset + PlayerGridSpacing;
+            VerticalOffset = verticalOffset + PlayerGridSpacing;
 
-            SetupTiles(tileSize);
+            SetupTiles();
                         
             Console.WriteLine("Grid create with dimensions {0}x{1}", Width.ToString(), Height.ToString());
         }
 
-        public void SetupTiles(int tileSize)
+        public void SetupTiles()
         {
             TileSet = new List<List<IPlaceable>>();
             for(int y = 0; y < Height; y++)
@@ -34,7 +41,7 @@ namespace MBRD.Entities
                 {
                     row.Add(new WaterFragment()
                     {
-                        Location = new Rectangle(x * (tileSize + GridSpacing), y * (tileSize + GridSpacing), tileSize, tileSize)
+                        Location = new Rectangle((x * ((TileSize) + GridSpacing)) + HorizontalOffset, (y * (TileSize + GridSpacing)) + VerticalOffset, TileSize, TileSize)
                     });
                 }
 

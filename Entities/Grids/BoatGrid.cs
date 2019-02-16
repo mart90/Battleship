@@ -4,7 +4,7 @@ namespace MBRD.Entities
 {
     class BoatGrid : Grid
     {
-        public BoatGrid(int width, int height, int tileSize) : base(width, height, tileSize)
+        public BoatGrid(int width, int height, int tileSize, int horizontalOffset, int verticalOffset) : base(width, height, tileSize, horizontalOffset, verticalOffset)
         {
         }
 

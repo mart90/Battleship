@@ -36,8 +36,8 @@ namespace MegaBattleshipRoyaleDeluxe
         GameState gameState;
         MouseState previousMouseState;
 
-        const int TargetWidth = 1920;
-        const int TargetHeight = 1080;
+        const int TargetWidth = 1600;
+        const int TargetHeight = 1000;
         
         enum GameState
         {
@@ -53,9 +53,7 @@ namespace MegaBattleshipRoyaleDeluxe
             graphics.PreferredBackBufferWidth = TargetWidth;
             graphics.PreferredBackBufferHeight = TargetHeight;
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 1200;
-            graphics.PreferredBackBufferHeight = 800;
-
+            
             graphics.ApplyChanges();
         }
 
@@ -67,8 +65,8 @@ namespace MegaBattleshipRoyaleDeluxe
         /// </summary>
         protected override void Initialize()
         {
-            _game.AddPlayer(new Player("player1", "red"));
-            //_game.AddPlayer(new Player("player2", "blue"));
+            _game.AddPlayer(new Player("player1", "red", 1));
+            _game.AddPlayer(new Player("player2", "blue", 2));
 
             _game.Initialize();
 
@@ -91,7 +89,6 @@ namespace MegaBattleshipRoyaleDeluxe
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            
             LoadGame();
         }
 
@@ -158,6 +155,7 @@ namespace MegaBattleshipRoyaleDeluxe
             {
                 foreach (Player player in _game.Players)
                 {
+                    var pos = _game.Players.IndexOf(player);
                     player.Draw(Content, spriteBatch);
                 }
             }
