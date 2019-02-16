@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
+using MBRD.Entities;
 
 namespace MegaBattleshipRoyaleDeluxe
 {
@@ -12,6 +13,8 @@ namespace MegaBattleshipRoyaleDeluxe
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private MBRDGame _game = new MBRDGame();
 
         private Texture2D orb;
         private Texture2D startButton;
@@ -53,6 +56,10 @@ namespace MegaBattleshipRoyaleDeluxe
             graphics.PreferredBackBufferHeight = TargetHeight;
             graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 800;
+
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -63,8 +70,11 @@ namespace MegaBattleshipRoyaleDeluxe
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            
+            _game.AddPlayer(new Player("player1", "red"));
+            _game.AddPlayer(new Player("player2", "blue"));
+
+            _game.Initialize();
+
             //enable the mousepointer
             IsMouseVisible = true;
 
@@ -149,7 +159,10 @@ namespace MegaBattleshipRoyaleDeluxe
 
             if (gameState == GameState.Playing)
             {
-                spriteBatch.Draw(orb, orbPosition, Color.White);
+                foreach (Player player in _game.Players)
+                {
+                    player.Draw(Content, spriteBatch);
+                }
             }
             
             spriteBatch.End();

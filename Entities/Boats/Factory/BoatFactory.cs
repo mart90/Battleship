@@ -15,17 +15,17 @@
 
         public AircraftCarrier GenerateDefaultAircraftCarrier()
         {
-            return GenerateBoat<AircraftCarrier>(5, "BoatTile-Front.png", null, "BoatTile-Back.png");
+            return GenerateBoat<AircraftCarrier>(5, "BoatTile-Front.png", "BoatTile-Middle.png", "BoatTile-Back.png");
         }
 
         public Battleship GenerateDefaultBattleship()
         {
-            return GenerateBoat<Battleship>(4, "BoatTile-Front.png", null, "BoatTile-Back.png");
+            return GenerateBoat<Battleship>(4, "BoatTile-Front.png", "BoatTile-Middle.png", "BoatTile-Back.png");
         }
 
         public Submarine GenerateDefaultSubmarine()
         {
-            return GenerateBoat<Submarine>(3, "BoatTile-Front.png", null, "BoatTile-Back.png");
+            return GenerateBoat<Submarine>(3, "BoatTile-Front.png", "BoatTile-Middle.png", "BoatTile-Back.png");
         }
 
         public Scout GenerateDefaultScout()
