@@ -11,7 +11,8 @@ namespace MBRD.Entities
 
         public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(contentManager.Load<Texture2D>("Sprites/WaterTiles/46"), Location, Color.White);
+            Rectangle rect = IconSpriteRectangleFactory.GetRectangle(3, 16);
+            spriteBatch.Draw(contentManager.Load<Texture2D>("icon-sprite"), Location, rect, Color.White);
         }
     }
 }
