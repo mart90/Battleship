@@ -15,8 +15,7 @@ namespace MegaBattleshipRoyaleDeluxe
         SpriteBatch spriteBatch;
 
         private MBRDGame _game = new MBRDGame();
-
-        private Texture2D orb;
+        
         private Texture2D startButton;
         private Texture2D exitButton;
         private Texture2D pauseButton;
@@ -31,8 +30,7 @@ namespace MegaBattleshipRoyaleDeluxe
         private const float OrbWidth = 50f;
         private const float OrbHeight = 50f;
         private float speed = 1.5f;
-
-        private Thread backgroundThread;
+        
         private bool isLoading = false;
         MouseState mouseState;
         GameState gameState;
@@ -54,7 +52,6 @@ namespace MegaBattleshipRoyaleDeluxe
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = TargetWidth;
             graphics.PreferredBackBufferHeight = TargetHeight;
-            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 1200;
             graphics.PreferredBackBufferHeight = 800;
@@ -71,7 +68,7 @@ namespace MegaBattleshipRoyaleDeluxe
         protected override void Initialize()
         {
             _game.AddPlayer(new Player("player1", "red"));
-            _game.AddPlayer(new Player("player2", "blue"));
+            //_game.AddPlayer(new Player("player2", "blue"));
 
             _game.Initialize();
 
@@ -172,10 +169,6 @@ namespace MegaBattleshipRoyaleDeluxe
 
         protected void LoadGame()
         {
-            //load the game images into the content pipeline
-            orb = Content.Load<Texture2D>(@"ball");
-            orbPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - (OrbWidth / 2), (GraphicsDevice.Viewport.Height / 2) - (OrbHeight / 2));
-
             //load the buttonimages into the content pipeline
             startButton = Content.Load<Texture2D>(@"Start_BTN");
             exitButton = Content.Load<Texture2D>(@"Exit_BTN");

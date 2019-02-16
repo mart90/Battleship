@@ -38,7 +38,7 @@ namespace MBRD.Entities
         public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
         {
             boatGrid.Draw(contentManager, spriteBatch);
-            firingGrid.Draw(contentManager, spriteBatch);
+            //firingGrid.Draw(contentManager, spriteBatch);
         }
     }    
 }
