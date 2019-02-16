@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Background 9.png
+#begin #1 - Transparent Icons.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Background 9.png;icon-sprite.png
+/build:#1 - Transparent Icons.png;icon-sprite.png
 
 #begin Exit_BTN.png
 /importer:TextureImporter
