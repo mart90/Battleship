@@ -17,11 +17,6 @@ namespace MBRD.Entities
         {
             Players = new List<Player>();
         }
-
-        public void Launch()
-        {
-            Setup();
-        }
         
         /// <summary>
         /// Add a player to the game
@@ -35,7 +30,7 @@ namespace MBRD.Entities
         /// <summary>
         /// Setup game starting position, generate player fleet
         /// </summary>
-        private void Setup()
+        public void Initialize()
         {
             GenerateFleet();
         }
