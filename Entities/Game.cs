@@ -47,7 +47,7 @@ namespace MBRD.Entities
 
         public void Hit(int x, int y)
         {
-            Players[0].boatGrid.Hit(x, y);
+            Players[0].BoatGrid.Hit(x, y);
 
             ShowFiringGrid(Players[0]);
             //ShowBoatGrid(Players[0]);
@@ -55,15 +55,15 @@ namespace MBRD.Entities
 
         public void ShowFiringGrid(Player Player)
         {
-            Debug.WriteLine("[" + Player.name + " - FiringGrid]");
+            Debug.WriteLine("[" + Player.Name + " - FiringGrid]");
             Debug.WriteLine("----------");
-            for (int x = 0; x < Player.firingGrid.Height; x++)
+            for (int x = 0; x < Player.FiringGrid.Height; x++)
             {
-                for (int y = 0; y < Player.firingGrid.Width; y++)
+                for (int y = 0; y < Player.FiringGrid.Width; y++)
                 {
-                    if(y == Player.firingGrid.Width - 1)
+                    if(y == Player.FiringGrid.Width - 1)
                     {
-                        if (Player.firingGrid.TileSet[y][x].Hit)
+                        if (Player.FiringGrid.TileSet[y][x].Hit)
                         {
                             Debug.WriteLine("H ");
                         } else {
@@ -71,7 +71,7 @@ namespace MBRD.Entities
                         }
                         
                     } else {
-                        if (Player.firingGrid.TileSet[y][x].Hit)
+                        if (Player.FiringGrid.TileSet[y][x].Hit)
                         {
                             Debug.Write("H ");
                         }
@@ -88,15 +88,15 @@ namespace MBRD.Entities
 
         public void ShowBoatGrid(Player player)
         {
-            Debug.WriteLine("[" + player.name + " - BoatGrid]");
+            Debug.WriteLine("[" + player.Name + " - BoatGrid]");
             Debug.WriteLine("----------");
-            for (int x = 0; x < player.boatGrid.Height; x++)
+            for (int x = 0; x < player.BoatGrid.Height; x++)
             {
-                for (int y = 0; y < player.boatGrid.Width; y++)
+                for (int y = 0; y < player.BoatGrid.Width; y++)
                 {
-                    if (y == player.boatGrid.Width - 1)
+                    if (y == player.BoatGrid.Width - 1)
                     {
-                        if (player.boatGrid.TileSet[y][x].Hit)
+                        if (player.BoatGrid.TileSet[y][x].Hit)
                         {
                             Debug.WriteLine("X ");
                         }
@@ -108,7 +108,7 @@ namespace MBRD.Entities
                     }
                     else
                     {
-                        if (player.boatGrid.TileSet[y][x].Hit)
+                        if (player.BoatGrid.TileSet[y][x].Hit)
                         {
                             Debug.Write("X ");
                         }

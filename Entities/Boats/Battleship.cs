@@ -4,5 +4,6 @@ namespace MBRD.Entities
 {
     class Battleship : AbstractBoat
     {
+
     }
 }

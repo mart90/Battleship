@@ -1,27 +1,27 @@
-﻿using System.Collections.Generic;
-
+﻿using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace MBRD.Entities
 {
     abstract class AbstractBoat : IBoat
     {
-        protected List<BoatFragment> boatFragmentList;
+        protected List<BoatFragment> _boatFragmentList;
 
-        public int length { get; set; }
-        public string frontImage { get; set; }
-        public string midImage { get; set; }
-        public string backImage { get; set; }
+        public int Length { get; set; }
+        public string FrontImage { get; set; }
+        public string MidImage { get; set; }
+        public string BackImage { get; set; }
 
         public AbstractBoat()
         {
-            boatFragmentList = new List<BoatFragment>();
+            _boatFragmentList = new List<BoatFragment>();
         }
 
         public void Create()
         {
-             for (int y = 0; y < length; y++)
+             for (int y = 0; y < Length; y++)
              {
-                boatFragmentList.Add(new BoatFragment());
+                _boatFragmentList.Add(new BoatFragment());
              }
         }
 
@@ -29,6 +29,5 @@ namespace MBRD.Entities
         {
             throw new System.NotImplementedException();
         }
-        
     }
 }

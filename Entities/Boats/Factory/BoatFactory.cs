@@ -5,10 +5,10 @@
         public T GenerateBoat<T>(int length, string frontImage, string midImage, string backImage) where T : new()
         {
             var boat = (IBoat)new T();
-            boat.length = length;
-            boat.frontImage = frontImage;
-            boat.midImage = midImage;
-            boat.backImage = backImage;
+            boat.Length = length;
+            boat.FrontImage = frontImage;
+            boat.MidImage = midImage;
+            boat.BackImage = backImage;
 
             return (T)boat;
         }
