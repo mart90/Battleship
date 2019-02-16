@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace MBRD.Entities
@@ -29,8 +31,14 @@ namespace MBRD.Entities
 
         private void SetupGrids()
         {
-            boatGrid = new BoatGrid(10, 10);
-            firingGrid = new FiringGrid(10, 10);
+            boatGrid = new BoatGrid(10, 10, 50);
+            firingGrid = new FiringGrid(10, 10, 50);
+        }
+
+        public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
+        {
+            boatGrid.Draw(contentManager, spriteBatch);
+            firingGrid.Draw(contentManager, spriteBatch);
         }
     }    
 }

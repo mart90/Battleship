@@ -14,7 +14,8 @@ namespace MegaBattleshipRoyaleDeluxe
         SpriteBatch spriteBatch;
 
         private MBRDGame _game = new MBRDGame();
-        private Texture2D seaTile;
+        private Texture2D _seaTile;
+        private readonly int _tileSize = 40;
 
         public Game1()
         {
@@ -39,6 +40,8 @@ namespace MegaBattleshipRoyaleDeluxe
 
             _game.Launch();
 
+            IsMouseVisible = true;
+
             base.Initialize();
         }
 
@@ -51,7 +54,7 @@ namespace MegaBattleshipRoyaleDeluxe
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            seaTile = Content.Load<Texture2D>("Sprites/WaterTiles/48");
+            _seaTile = Content.Load<Texture2D>("Sprites/WaterTiles/48");
         }
 
         /// <summary>
@@ -84,12 +87,12 @@ namespace MegaBattleshipRoyaleDeluxe
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
             foreach (Player player in _game.Players)
             {
-                _game.ShowBoatGrid(player, spriteBatch, seaTile);
+                player.Draw(Content, spriteBatch);
             }
             spriteBatch.End();
 

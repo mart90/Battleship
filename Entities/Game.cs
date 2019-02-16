@@ -91,7 +91,7 @@ namespace MBRD.Entities
             }
         }
 
-        public void ShowBoatGrid(Player player, SpriteBatch spriteBatch, Texture2D seaTile)
+        public void ShowBoatGrid(Player player)
         {
             Debug.WriteLine("[" + player.name + " - BoatGrid]");
             Debug.WriteLine("----------");
@@ -108,7 +108,6 @@ namespace MBRD.Entities
                         else
                         {
                             Debug.WriteLine("~ ");
-                            spriteBatch.Draw(seaTile, new Rectangle(x * 51, y * 51, 50, 50), Color.White);
                         }
 
                     }
@@ -121,7 +120,6 @@ namespace MBRD.Entities
                         else
                         {
                             Debug.Write("~ ");
-                            spriteBatch.Draw(seaTile, new Rectangle(x * 51, y * 51, 50, 50), Color.White);
                         }
 
                     }

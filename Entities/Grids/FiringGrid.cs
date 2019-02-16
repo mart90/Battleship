@@ -4,7 +4,7 @@ namespace MBRD.Entities
 {
     class FiringGrid : Grid
     {
-        public FiringGrid(int width, int height) : base(width, height)
+        public FiringGrid(int width, int height, int tileSize) : base(width, height, tileSize)
         {
         }
 

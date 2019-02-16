@@ -1,10 +1,14 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MBRD.Entities
 {
     public interface IPlaceable
     {
-        Texture2D Image { get; set; }
+        Rectangle Location { get; set; }
         bool Hit { get; set; }
+
+        void Draw(ContentManager contentManager, SpriteBatch spriteBatch);
     }
 }
