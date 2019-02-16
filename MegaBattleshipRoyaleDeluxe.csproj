@@ -41,6 +41,23 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Entities\Boats\AbstractBoat.cs" />
+    <Compile Include="Entities\Boats\AircraftCarrier.cs" />
+    <Compile Include="Entities\Boats\Battleship.cs" />
+    <Compile Include="Entities\Boats\Factory\BoatFactory.cs" />
+    <Compile Include="Entities\Boats\Factory\FleetFactory.cs" />
+    <Compile Include="Entities\Boats\Fleet.cs" />
+    <Compile Include="Entities\Boats\IBoat.cs" />
+    <Compile Include="Entities\Boats\Scout.cs" />
+    <Compile Include="Entities\Boats\Submarine.cs" />
+    <Compile Include="Entities\Fragments\BoatFragment.cs" />
+    <Compile Include="Entities\Fragments\WaterFragment.cs" />
+    <Compile Include="Entities\Game.cs" />
+    <Compile Include="Entities\Grid.cs" />
+    <Compile Include="Entities\Grids\BoatGrid.cs" />
+    <Compile Include="Entities\Grids\FiringGrid.cs" />
+    <Compile Include="Entities\IPlaceable.cs" />
+    <Compile Include="Entities\Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
