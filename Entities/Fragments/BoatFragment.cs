@@ -1,8 +1,10 @@
-﻿namespace MBRD.Entities
+﻿using Microsoft.Xna.Framework.Graphics;
+
+namespace MBRD.Entities
 {
     class BoatFragment : IPlaceable
     {
-        public string image = null;
+        public Texture2D Image { get; set; }
         public bool Hit { get; set; }
     }
 }

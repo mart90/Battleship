@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MBRD.Entities;
 
 namespace MegaBattleshipRoyaleDeluxe
 {
@@ -12,10 +13,17 @@ namespace MegaBattleshipRoyaleDeluxe
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private MBRDGame _game = new MBRDGame();
+        private Texture2D seaTile;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 800;
+
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -26,7 +34,10 @@ namespace MegaBattleshipRoyaleDeluxe
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            _game.AddPlayer(new Player("player1", "red"));
+            _game.AddPlayer(new Player("player2", "blue"));
+
+            _game.Launch();
 
             base.Initialize();
         }
@@ -40,7 +51,7 @@ namespace MegaBattleshipRoyaleDeluxe
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            seaTile = Content.Load<Texture2D>("Sprites/WaterTiles/48");
         }
 
         /// <summary>
@@ -75,7 +86,12 @@ namespace MegaBattleshipRoyaleDeluxe
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            foreach (Player player in _game.Players)
+            {
+                _game.ShowBoatGrid(player, spriteBatch, seaTile);
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

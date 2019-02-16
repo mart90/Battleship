@@ -32,7 +32,5 @@ namespace MBRD.Entities
             boatGrid = new BoatGrid(10, 10);
             firingGrid = new FiringGrid(10, 10);
         }
-
-        
     }    
 }
