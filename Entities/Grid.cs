@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace MBRD.Entities
 {
-    public abstract class Grid
+    public abstract class AbstractGrid
     {
         public int Width { get; set; }
         public int Height { get; set; }
@@ -18,7 +18,7 @@ namespace MBRD.Entities
         private const int GridSpacing = 1;
         private const int PlayerGridSpacing = 10;
 
-        public Grid(int width, int height, int tileSize, int horizontalOffset = 0, int verticalOffset = 0)
+        public AbstractGrid(int width, int height, int tileSize, int horizontalOffset = 0, int verticalOffset = 0)
         {
             Width = width;
             Height = height;

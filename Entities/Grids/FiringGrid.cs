@@ -2,7 +2,7 @@
 
 namespace MBRD.Entities
 {
-    class FiringGrid : Grid
+    class FiringGrid : AbstractGrid
     {
         public FiringGrid(int width, int height, int tileSize, int horizontalOffset, int verticalOffset) : base(width, height, tileSize, horizontalOffset, verticalOffset)
         {

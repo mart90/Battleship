@@ -171,8 +171,6 @@ namespace MegaBattleshipRoyaleDeluxe
             startButton = Content.Load<Texture2D>(@"Start_BTN");
             exitButton = Content.Load<Texture2D>(@"Exit_BTN");
 
-            //lalal 
-
             //set the position of the buttons
             startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 205, 100);
             exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 205, 250);
