@@ -6,7 +6,8 @@ MBRD::Game1 -up-|> Microsoft::Xna::Framework::Game
 MBRD::Game1 --> MBRD::MBRDGame 
 MBRD::Game1::GameState -right-> MBRD::GameState
 MBRD::MBRDGame --> MBRD::Player
-
+MBRD::MBRDGame --> MBRD::Boats::Factory::FleetFactory
+MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
 MBRD::Boats::Fleet <-- MBRD::Player 
 MBRD::Boats::AircraftCarrier --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Battleship --|> MBRD::Boats::AbstractBoat
@@ -63,6 +64,15 @@ class MBRD::Boats::Fleet {
 
   +Fleet()
   +Add(boat : AbstractBoat) : void 
+}
+
+interface MBRD::Boats::IBoat {
+  +length : int 
+  +frontImage : string 
+  +midImage : string 
+  +backImage : string 
+
+  +Hit() : void
 }
 
 abstract class MBRD::Boats::AbstractBoat{
