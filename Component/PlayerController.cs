@@ -29,7 +29,7 @@ namespace MBRD.Component
         public override void Initialize()
         {
             CreatePlayer("Player 1", Color.Blue, 1, true);
-            CreatePlayer("Player 2", Color.Blue, 1, false);
+            CreatePlayer("Player 2", Color.Blue, 2, false);
 
             base.Initialize();
         }

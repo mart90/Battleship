@@ -17,7 +17,8 @@ namespace MBRD
 
 
         private MBRDGame _game = new MBRDGame();
-        
+
+        private SpriteFont font;
         private Texture2D startButton;
         private Texture2D exitButton;
         private Texture2D pauseButton;
@@ -49,6 +50,8 @@ namespace MBRD
             Content.RootDirectory = "Content";
             
             graphics.ApplyChanges();
+
+            spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         /// <summary>
@@ -65,6 +68,7 @@ namespace MBRD
 
             Components.Add(playerController = new PlayerController(this));
             //Services.AddService(typeof(IPlayerService), playerController);
+            Services.AddService(typeof(SpriteBatch), spriteBatch);
 
             //enable the mousepointer
             IsMouseVisible = true;
@@ -82,7 +86,7 @@ namespace MBRD
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
             PlayerController playerController = (PlayerController)Services.GetService(typeof(IPlayerService));
 
 
@@ -108,15 +112,7 @@ namespace MBRD
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 gameState = GameState.StartMenu;
-
-            // TODO: Add your update logic here
-            orbPosition.X += speed;
-
-            if (orbPosition.X > (GraphicsDevice.Viewport.Width - OrbWidth) || orbPosition.X < 0)
-            {
-                speed *= -1;
-            }
-
+            
             mouseState = Mouse.GetState();
             if (previousMouseState.LeftButton == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Released)
             {
@@ -156,9 +152,9 @@ namespace MBRD
                     if (player.IsActive)
                     {
                         player.Draw(Content, spriteBatch);
+                        spriteBatch.DrawString(font, player.name.ToString(), new Vector2(700, 10), Color.White);
                     }
                 }
-
             }
             
             spriteBatch.End();
@@ -171,6 +167,7 @@ namespace MBRD
             //load the buttonimages into the content pipeline
             startButton = Content.Load<Texture2D>(@"Start_BTN");
             exitButton = Content.Load<Texture2D>(@"Exit_BTN");
+            font = Content.Load<SpriteFont>("PlayerName");
 
             //set the position of the buttons
             startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 205, 100);
