@@ -1,10 +1,12 @@
 ﻿@startuml
 set namespaceSeparator ::
 
-Microsoft::Xna::Framework::Game <|-- MegaBattleshipRoyaleDeluxe::Game1
-MBRD::Entities::MBRDGame <-- MegaBattleshipRoyaleDeluxe::Game1
-MegaBattleshipRoyaleDeluxe::GameState <-- MegaBattleshipRoyaleDeluxe::Game1::GameState
-MBRD::Entities::Player <-- MBRD::Entities::MBRDGame
+
+MegaBattleshipRoyaleDeluxe::Game1 --|> Microsoft::Xna::Framework::Game
+MegaBattleshipRoyaleDeluxe::Game1 --> MBRD::Entities::MBRDGame 
+MegaBattleshipRoyaleDeluxe::Game1::GameState --> MegaBattleshipRoyaleDeluxe::GameState
+MBRD::Entities::MBRDGame --> MBRD::Entities::Player
+
 MBRD::Entities::Boats::Fleet <-- MBRD::Entities::Player 
 MBRD::Entities::Boats::AbstractBoat ..|> MBRD::Entities::Boats::IBoat
 MBRD::Entities::Boats::AircraftCarrier --|> MBRD::Entities::Boats::AbstractBoat
@@ -24,18 +26,14 @@ MBRD::Entities::Fragments::BoatFrament ..|> MBRD::Entities::IPlaceable
 MBRD::Entities::Fragments::WaterFrament ..|> MBRD::Entities::IPlaceable
 
 MBRD::Entities::IPlaceable ..> Microsoft::Xna::Framework::Content::ContentManager
-MBRD::Entities::IPlaceable ..> Microsoft.Xna.Framework.Graphics::SpriteBatch
+MBRD::Entities::IPlaceable ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
 
 MBRD::Entities::AbstractGrid ..> Microsoft::Xna::Framework::Content::ContentManager
-MBRD::Entities::AbstractGrid ..> Microsoft.Xna.Framework.Graphics::SpriteBatch
+MBRD::Entities::AbstractGrid ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
 MBRD::Entities::AbstractGrid ..> MBRD::Entities::Boats::AbstractBoat
 
 MBRD::Entities::Grid::BoatGrid --|> MBRD::Entities::AbstractGrid
 MBRD::Entities::Grid::FiringGrid --|> MBRD::Entities::AbstractGrid
-
-class Microsoft::Xna::Framework::Game{
- #Initialize() : void 
-}
 
 class MBRD::Entities::MBRDGame {
   +Players : List<Player>
