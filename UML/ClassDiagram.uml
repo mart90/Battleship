@@ -2,9 +2,9 @@
 set namespaceSeparator ::
 
 
-MegaBattleshipRoyaleDeluxe::Game1 --|> Microsoft::Xna::Framework::Game
+MegaBattleshipRoyaleDeluxe::Game1 -down-|> Microsoft::Xna::Framework::Game
 MegaBattleshipRoyaleDeluxe::Game1 --> MBRD::Entities::MBRDGame 
-MegaBattleshipRoyaleDeluxe::Game1::GameState --> MegaBattleshipRoyaleDeluxe::GameState
+MegaBattleshipRoyaleDeluxe::Game1::GameState -right-> MegaBattleshipRoyaleDeluxe::GameState
 MBRD::Entities::MBRDGame --> MBRD::Entities::Player
 
 MBRD::Entities::Boats::Fleet <-- MBRD::Entities::Player 
@@ -13,10 +13,10 @@ MBRD::Entities::Boats::AircraftCarrier --|> MBRD::Entities::Boats::AbstractBoat
 MBRD::Entities::Boats::Battleship --|> MBRD::Entities::Boats::AbstractBoat
 MBRD::Entities::Boats::Scout --|> MBRD::Entities::Boats::AbstractBoat
 MBRD::Entities::Boats::Submarine --|> MBRD::Entities::Boats::AbstractBoat
-MBRD::Entities::Boats::Fleet::add ..> MBRD::Entities::Boats::IBoat 
+MBRD::Entities::Boats::Fleet::add .up.> MBRD::Entities::Boats::IBoat 
 
 MBRD::Entities::Boats::Factory::FleetFactory..> MBRD::Entities::Boats::Fleet
-MBRD::Entities::Boats::Factory::FleetFactory ..> MBRD::Entities::Boats::Factory::BoatFactory
+MBRD::Entities::Boats::Factory::FleetFactory .left.> MBRD::Entities::Boats::Factory::BoatFactory
 MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::AircraftCarrier 
 MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::Battleship 
 MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::Scout 
