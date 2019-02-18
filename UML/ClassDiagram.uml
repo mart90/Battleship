@@ -32,8 +32,8 @@ MBRD::Grids::AbstractGrid ..> Microsoft::Xna::Framework::Content::ContentManager
 MBRD::Grids::AbstractGrid ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
 MBRD::Grids::AbstractGrid ..> MBRD::Boats::AbstractBoat
 
-MBRD::Grid::BoatGrid --|> MBRD::Grids::AbstractGrid
-MBRD::Grid::FiringGrid --|> MBRD::Grids::AbstractGrid
+MBRD::Grids::BoatGrid --|> MBRD::Grids::AbstractGrid
+MBRD::Grids::FiringGrid --|> MBRD::Grids::AbstractGrid
 
 class MBRD::MBRDGame {
   +Players : List<Player>
@@ -112,11 +112,11 @@ abstract class MBRD::Grids::AbstractGrid {
   +DoesItFit(boat : AbstractBoat, startX : int, startY : int, horizontal : bool) : bool
 }
 
-class MBRD::Grid::BoatGrid {
+class MBRD::Grids::BoatGrid {
   +BoatGrid(width : int, height : int, tileSize : int, horizontalOffset : int, verticalOffset : int)
 }
 
-class MBRD::Grid::FiringGrid {
+class MBRD::Grids::FiringGrid {
   +FiringGrid(width : int, height : int, tileSize : int, horizontalOffset : int, verticalOffset : int)
   +Fired(x : int, y : int) : void
 }
