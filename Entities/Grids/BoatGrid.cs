@@ -2,9 +2,9 @@
 
 namespace MBRD.Entities
 {
-    class BoatGrid : Grid
+    class BoatGrid : AbstractGrid
     {
-        public BoatGrid(int width, int height) : base(width, height)
+        public BoatGrid(int width, int height, int tileSize, int horizontalOffset, int verticalOffset) : base(width, height, tileSize, horizontalOffset, verticalOffset)
         {
         }
 

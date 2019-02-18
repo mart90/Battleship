@@ -1,0 +1,177 @@
+﻿@startuml
+set namespaceSeparator ::
+
+Microsoft::Xna::Framework::Game <|-- MegaBattleshipRoyaleDeluxe::Game1
+MBRD::Entities::MBRDGame <-- MegaBattleshipRoyaleDeluxe::Game1
+MegaBattleshipRoyaleDeluxe::GameState <-- MegaBattleshipRoyaleDeluxe::Game1::GameState
+MBRD::Entities::Player <-- MBRD::Entities::MBRDGame
+MBRD::Entities::Boats::Fleet <-- MBRD::Entities::Player 
+MBRD::Entities::Boats::AbstractBoat ..|> MBRD::Entities::Boats::IBoat
+MBRD::Entities::Boats::AircraftCarrier --|> MBRD::Entities::Boats::AbstractBoat
+MBRD::Entities::Boats::Battleship --|> MBRD::Entities::Boats::AbstractBoat
+MBRD::Entities::Boats::Scout --|> MBRD::Entities::Boats::AbstractBoat
+MBRD::Entities::Boats::Submarine --|> MBRD::Entities::Boats::AbstractBoat
+MBRD::Entities::Boats::Fleet::add ..> MBRD::Entities::Boats::IBoat 
+
+MBRD::Entities::Boats::Factory::FleetFactory..> MBRD::Entities::Boats::Fleet
+MBRD::Entities::Boats::Factory::FleetFactory ..> MBRD::Entities::Boats::Factory::BoatFactory
+MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::AircraftCarrier 
+MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::Battleship 
+MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::Scout 
+MBRD::Entities::Boats::Factory::BoatFactory ..> MBRD::Entities::Boats::Submarine 
+
+MBRD::Entities::Fragments::BoatFrament ..|> MBRD::Entities::IPlaceable
+MBRD::Entities::Fragments::WaterFrament ..|> MBRD::Entities::IPlaceable
+
+MBRD::Entities::IPlaceable ..> Microsoft::Xna::Framework::Content::ContentManager
+MBRD::Entities::IPlaceable ..> Microsoft.Xna.Framework.Graphics::SpriteBatch
+
+MBRD::Entities::AbstractGrid ..> Microsoft::Xna::Framework::Content::ContentManager
+MBRD::Entities::AbstractGrid ..> Microsoft.Xna.Framework.Graphics::SpriteBatch
+MBRD::Entities::AbstractGrid ..> MBRD::Entities::Boats::AbstractBoat
+
+MBRD::Entities::Grid::BoatGrid --|> MBRD::Entities::AbstractGrid
+MBRD::Entities::Grid::FiringGrid --|> MBRD::Entities::AbstractGrid
+
+class Microsoft::Xna::Framework::Game{
+ #Initialize() : void 
+}
+
+class MBRD::Entities::MBRDGame {
+  +Players : List<Player>
+
+  +MBRDgame()
+  +AddPlayer() : void
+  +Initialize() : void
+  +GenerateFleet() : void
+  +Hit(int x, int y) : void
+  +ShowFiringGrid(Player Player) : void
+  +ShowBoatGrid(Player player) : void  
+}
+
+class MBRD::Entities::Player {
+  +name : string 
+  +color : string 
+  +order : int 
+  +boatGrid : BoatGrid 
+  +firingGrid : FiringGrid 
+  +fleet : Fleet
+
+  +Player(newName : string, newColor : string, playerOrder : int)
+  +addFleet(fleet : Fleet) : void 
+}
+
+class MBRD::Entities::Boats::Fleet {
+  -boats : List<IBoat>
+
+  +Fleet()
+  +Add(boat : IBoat) : void 
+}
+
+interface MBRD::Entities::Boats::IBoat {
+  +length : int 
+  +frontImage : string 
+  +midImage : string 
+  +backImage : string 
+
+  +Hit() : void 
+}
+
+abstract class MBRD::Entities::Boats::AbstractBoat{
+  +length : int 
+  +frontImage : string 
+  +midImage : string 
+  +backImage : string 
+
+  +AbstractBoat()
+  +Create() : void 
+  +{abstract} Hit() : void 
+}
+
+class MBRD::Entities::Boats::AircraftCarrier
+class MBRD::Entities::Boats::Battleship
+class MBRD::Entities::Boats::Scout
+class MBRD::Entities::Boats::Submarine
+
+class MBRD::Entities::Boats::Factory::BoatFactory {
+  +GenerateBoat(length : int, frontImage : string, midImage : string, backImage : string)
+  +GenerateDefaultAircraftCarrier() : AircraftCarrier 
+  +GenerateDefaultBattleship() : Battleship 
+  +GenerateDefaultSubmarine() : Submarine 
+  +GenerateDefaultScout() : Scout 
+}
+
+class MBRD::Entities::Boats::Factory::FleetFactory {
+  +GenerateFleet() : Fleet 
+}
+
+abstract class MBRD::Entities::AbstractGrid {
+  +Width : int 
+
+  +SetupTiles() : void
+  +Draw(contentManager : ContentManager, spriteBatch : SpriteBatch)
+  +DoesItFit(boat : AbstractBoat, fragments : List<Tuple<int, int>>) : bool
+  +DoesItFit(boat : AbstractBoat, startX : int, startY : int, horizontal : bool) : bool
+}
+
+class MBRD::Entities::Grid::BoatGrid {
+  +BoatGrid(width : int, height : int, tileSize : int, horizontalOffset : int, verticalOffset : int)
+}
+
+class MBRD::Entities::Grid::FiringGrid {
+  +FiringGrid(width : int, height : int, tileSize : int, horizontalOffset : int, verticalOffset : int)
+  +Fired(x : int, y : int) : void
+}
+
+class MegaBattleshipRoyaleDeluxe::Game1 {
+  -graphics : GraphicsDeviceManager 
+  -spriteBatch : SpriteBatch 
+  -_game : MBRDGame 
+  -startButton : Texture2D 
+  -exitButton : Texture2D 
+  -pauseButton : Texture2D 
+  -resumeButton : Texture2D 
+  -loadingScreen : Texture2D 
+  -orbPosition : Vector2 
+  -startButtonPosition : Vector2 
+  -exitButtonPosition : Vector2 
+  -resumeButtonPosition : Vector2 
+  -OrbWidth : float = 50f
+  -OrbHeight : float  = 50f
+  -speed : float = 1.5f
+  -isLoading : bool = false
+  -mouseState : MouseState 
+  -gameState : GameState 
+  -previousMouseState : MouseState 
+  -TargetWidth : int = 1600
+  -TargetHeight : int = 1000
+
+  +Game1()
+  #Initialize() : void
+  #LoadContent() : void
+  #UnloadContent : void
+  #Update(gameTime : GameTime) : void
+  #Draw(gameTime : GameTime) : void
+  #LoadGame() : void
+  #MouseClicked(x : int, y : int) : void
+}
+
+interface MBRD::Entities::IPlaceable {
+  +Hit : bool 
+  +location : Rectangle 
+
+  +Draw(ContentManager contentManager, SpriteBatch spriteBatch) : void
+}
+
+class MBRD::Entities::Fragments::BoatFrament{
+}
+class MBRD::Entities::Fragments::WaterFrament {
+}
+
+enum MegaBattleshipRoyaleDeluxe::GameState {
+ StartMenu
+ Loading
+ Playing
+ Paused
+}
+@enduml

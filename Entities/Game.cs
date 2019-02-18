@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,19 +9,13 @@ using System.Threading.Tasks;
 
 namespace MBRD.Entities
 {
-    class Game
+    class MBRDGame
     {
-        private List<Player> Players;
+        public List<Player> Players;
 
-        public Game()
+        public MBRDGame()
         {
             Players = new List<Player>();
-        }
-
-        public void Launch()
-        {
-            Setup();
-            Start();
         }
         
         /// <summary>
@@ -34,16 +30,9 @@ namespace MBRD.Entities
         /// <summary>
         /// Setup game starting position, generate player fleet
         /// </summary>
-        private void Setup()
+        public void Initialize()
         {
             GenerateFleet();
-        }
-
-        private void Start()
-        {
-            Debug.WriteLine("PLAYER 1 START!");
-            ShowFiringGrid(Players[0]);
-            ShowBoatGrid(Players[0]);
         }
         
         private void GenerateFleet()
@@ -61,10 +50,10 @@ namespace MBRD.Entities
             Players[0].boatGrid.Hit(x, y);
 
             ShowFiringGrid(Players[0]);
-            ShowBoatGrid(Players[0]);
+            //ShowBoatGrid(Players[0]);
         }
 
-        private void ShowFiringGrid(Player Player)
+        public void ShowFiringGrid(Player Player)
         {
             Debug.WriteLine("[" + Player.name + " - FiringGrid]");
             Debug.WriteLine("----------");
@@ -97,13 +86,13 @@ namespace MBRD.Entities
             }
         }
 
-        private void ShowBoatGrid(Player player)
+        public void ShowBoatGrid(Player player)
         {
             Debug.WriteLine("[" + player.name + " - BoatGrid]");
             Debug.WriteLine("----------");
             for (int x = 0; x < player.boatGrid.Height; x++)
             {
-                for (int y = 0; y < player.firingGrid.Width; y++)
+                for (int y = 0; y < player.boatGrid.Width; y++)
                 {
                     if (y == player.boatGrid.Width - 1)
                     {

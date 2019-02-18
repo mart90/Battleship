@@ -1,24 +1,37 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace MBRD.Entities
 {
-    public abstract class Grid
+    public abstract class AbstractGrid
     {
         public int Width { get; set; }
         public int Height { get; set; }
+        public int HorizontalOffset { get; set; }
+        public int VerticalOffset { get; set; }
+        public int TileSize { get; set; }
         public List<List<IPlaceable>> TileSet { get; set; }
 
-        public Grid(int width, int height)
+        private const int GridSpacing = 1;
+        private const int PlayerGridSpacing = 10;
+
+        public AbstractGrid(int width, int height, int tileSize, int horizontalOffset = 0, int verticalOffset = 0)
         {
             Width = width;
             Height = height;
+            TileSize = tileSize;
+            HorizontalOffset = horizontalOffset + PlayerGridSpacing;
+            VerticalOffset = verticalOffset + PlayerGridSpacing;
+
+            SetupTiles();
                         
-            Console.WriteLine("Firinggrid create with dimensions {0}x{1}", Width.ToString(), Height.ToString());
-            Create();
+            Console.WriteLine("Grid create with dimensions {0}x{1}", Width.ToString(), Height.ToString());
         }
 
-        private void Create()
+        public void SetupTiles()
         {
             TileSet = new List<List<IPlaceable>>();
             for(int y = 0; y < Height; y++)
@@ -26,10 +39,24 @@ namespace MBRD.Entities
                 List<IPlaceable> row = new List<IPlaceable>();
                 for (int x = 0; x < Width; x++)
                 {
-                    row.Add(new BoatFragment());
+                    row.Add(new WaterFragment()
+                    {
+                        Location = new Rectangle((x * ((TileSize) + GridSpacing)) + HorizontalOffset, (y * (TileSize + GridSpacing)) + VerticalOffset, TileSize, TileSize)
+                    });
                 }
 
                 TileSet.Add(row);
+            }
+        }
+
+        public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
+        {
+            foreach (List<IPlaceable> placeables in TileSet)
+            {
+                foreach (IPlaceable placeable in placeables)
+                {
+                    placeable.Draw(contentManager, spriteBatch);
+                }
             }
         }
 
