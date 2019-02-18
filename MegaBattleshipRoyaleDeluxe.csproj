@@ -69,13 +69,12 @@
     <Compile Include="Enumeration.cs" />
     <Compile Include="Fragments\BoatFragment.cs" />
     <Compile Include="Fragments\WaterFragment.cs" />
-    <Compile Include="MBRDGame.cs" />
     <Compile Include="Grids\AbstractGrid.cs" />
     <Compile Include="Grids\BoatGrid.cs" />
     <Compile Include="Grids\FiringGrid.cs" />
     <Compile Include="Fragments\IFragment.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="NewGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,18 +2,19 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using MBRD.Boats.Factory;
 
 namespace MBRD
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class NewGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private readonly MBRDGame _game;
         private readonly ConfigManager config;
         
         private Texture2D startButton;
@@ -22,7 +23,6 @@ namespace MBRD
         private Texture2D resumeButton;
         private Texture2D loadingScreen;
 
-        private Vector2 orbPosition;
         private Vector2 startButtonPosition;
         private Vector2 exitButtonPosition;
         private Vector2 resumeButtonPosition;
@@ -31,10 +31,10 @@ namespace MBRD
         MouseState mouseState;
         GameState gameState;
         MouseState previousMouseState;
-        
-        public Game1()
+        private List<Player> Players;
+
+        public NewGame()
         {
-            _game = new MBRDGame();
             config = new ConfigManager("Config.ini");
             graphics = new GraphicsDeviceManager(this)
             {
@@ -42,7 +42,8 @@ namespace MBRD
                 PreferredBackBufferHeight = int.Parse(config.Read("Height", "Window"))
             };
             Content.RootDirectory = "Content";
-            
+            Players = new List<Player>();
+
             graphics.ApplyChanges();
         }
 
@@ -54,10 +55,15 @@ namespace MBRD
         /// </summary>
         protected override void Initialize()
         {
-            _game.AddPlayer(new Player("player1", "red", 1));
-            _game.AddPlayer(new Player("player2", "blue", 2));
+            Players.Add(new Player("player1", "red", 1));
+            Players.Add(new Player("player2", "blue", 2));
 
-            _game.Initialize();
+            FleetFactory FleetFactory = new FleetFactory();
+
+            foreach (Player Player in Players)
+            {
+                Player.AddFleet(FleetFactory.GenerateFleet());
+            }
 
             //enable the mousepointer
             IsMouseVisible = true;
@@ -134,13 +140,13 @@ namespace MBRD
 
             if (gameState == GameState.Playing)
             {
-                foreach (Player player in _game.Players)
+                foreach (Player player in Players)
                 {
-                    var pos = _game.Players.IndexOf(player);
+                    var pos = Players.IndexOf(player);
                     player.Draw(Content, spriteBatch);
                 }
             }
-            
+
             spriteBatch.End();
 
             base.Draw(gameTime);
