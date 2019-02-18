@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Threading;
 using MBRD;
 
-namespace MegaBattleshipRoyaleDeluxe
+namespace MBRD
 {
     /// <summary>
     /// This is the main type for your game.

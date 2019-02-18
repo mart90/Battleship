@@ -9,7 +9,7 @@
     <ProjectGuid>{76F38401-8FCA-47DB-901E-377D0D531BE0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MegaBattleshipRoyaleDeluxe</RootNamespace>
+    <RootNamespace>MBRD</RootNamespace>
     <AssemblyName>MegaBattleshipRoyaleDeluxe</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
@@ -41,23 +41,23 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Mbrd\Boats\AbstractBoat.cs" />
-    <Compile Include="Mbrd\Boats\AircraftCarrier.cs" />
-    <Compile Include="Mbrd\Boats\Battleship.cs" />
-    <Compile Include="Mbrd\Boats\Factory\BoatFactory.cs" />
-    <Compile Include="Mbrd\Boats\Factory\FleetFactory.cs" />
-    <Compile Include="Mbrd\Boats\Fleet.cs" />
-    <Compile Include="Mbrd\Boats\IBoat.cs" />
-    <Compile Include="Mbrd\Boats\Scout.cs" />
-    <Compile Include="Mbrd\Boats\Submarine.cs" />
-    <Compile Include="Mbrd\Fragments\BoatFragment.cs" />
-    <Compile Include="Mbrd\Fragments\WaterFragment.cs" />
-    <Compile Include="Mbrd\Game.cs" />
-    <Compile Include="Mbrd\Grids\AbstractGrid.cs" />
-    <Compile Include="Mbrd\Grids\BoatGrid.cs" />
-    <Compile Include="Mbrd\Grids\FiringGrid.cs" />
-    <Compile Include="Mbrd\Fragments\IFragment.cs" />
-    <Compile Include="Mbrd\Player.cs" />
+    <Compile Include="Boats\AbstractBoat.cs" />
+    <Compile Include="Boats\AircraftCarrier.cs" />
+    <Compile Include="Boats\Battleship.cs" />
+    <Compile Include="Boats\Factory\BoatFactory.cs" />
+    <Compile Include="Boats\Factory\FleetFactory.cs" />
+    <Compile Include="Boats\Fleet.cs" />
+    <Compile Include="Boats\IBoat.cs" />
+    <Compile Include="Boats\Scout.cs" />
+    <Compile Include="Boats\Submarine.cs" />
+    <Compile Include="Fragments\BoatFragment.cs" />
+    <Compile Include="Fragments\WaterFragment.cs" />
+    <Compile Include="MBRDGame.cs" />
+    <Compile Include="Grids\AbstractGrid.cs" />
+    <Compile Include="Grids\BoatGrid.cs" />
+    <Compile Include="Grids\FiringGrid.cs" />
+    <Compile Include="Fragments\IFragment.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

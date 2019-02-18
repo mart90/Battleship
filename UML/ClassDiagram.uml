@@ -2,9 +2,9 @@
 set namespaceSeparator ::
 
 
-MegaBattleshipRoyaleDeluxe::Game1 -down-|> Microsoft::Xna::Framework::Game
-MegaBattleshipRoyaleDeluxe::Game1 --> MBRD::MBRDGame 
-MegaBattleshipRoyaleDeluxe::Game1::GameState -right-> MegaBattleshipRoyaleDeluxe::GameState
+MBRD::Game1 -up-|> Microsoft::Xna::Framework::Game
+MBRD::Game1 --> MBRD::MBRDGame 
+MBRD::Game1::GameState -right-> MBRD::GameState
 MBRD::MBRDGame --> MBRD::Player
 
 MBRD::Boats::Fleet <-- MBRD::Player 
@@ -121,7 +121,7 @@ class MBRD::Grids::FiringGrid {
   +Fired(x : int, y : int) : void
 }
 
-class MegaBattleshipRoyaleDeluxe::Game1 {
+class MBRD::Game1 {
   -graphics : GraphicsDeviceManager 
   -spriteBatch : SpriteBatch 
   -_game : MBRDGame 
@@ -166,7 +166,7 @@ class MBRD::Fragments::BoatFrament{
 class MBRD::Fragments::WaterFrament {
 }
 
-enum MegaBattleshipRoyaleDeluxe::GameState {
+enum MBRD::GameState {
  StartMenu
  Loading
  Playing

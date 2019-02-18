@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MegaBattleshipRoyaleDeluxe
+namespace MBRD
 {
 #if WINDOWS || LINUX
     /// <summary>
