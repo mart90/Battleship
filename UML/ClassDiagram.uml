@@ -4,7 +4,11 @@ scale max 1900 width
 
 MBRD::Game1 -up-|> Microsoft::Xna::Framework::Game
 MBRD::Game1 --> MBRD::MBRDGame 
+MBRD::Game1 --> MBRD::Component::PlayerController 
 MBRD::Game1::GameState -right-> MBRD::GameState
+
+MBRD::Component::PlayerController ..|> MBRD::Component::IPlayerService
+
 MBRD::MBRDGame --> MBRD::Player
 MBRD::MBRDGame --> MBRD::Boats::Factory::FleetFactory
 MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
@@ -124,6 +128,7 @@ class MBRD::Grids::FiringGrid {
 class MBRD::Game1 {
   -graphics : GraphicsDeviceManager 
   -spriteBatch : SpriteBatch 
+  -playerController : PlayerControlller
   -_game : MBRDGame 
   -startButton : Texture2D 
   -exitButton : Texture2D 
@@ -152,6 +157,19 @@ class MBRD::Game1 {
   #Draw(gameTime : GameTime) : void
   #LoadGame() : void
   #MouseClicked(x : int, y : int) : void
+}
+
+interface MBRD::Component::IPlayerService {
+    +CreatePlayer(name : string, color : Color, order : int = 1, active : bool = true) : void
+    +GetActive() : Player
+    +GetPlayers() : List<Player>
+}
+
+class MBRD::Component::PlayerController {
+  +IsActive : bool
+
+  +Initialize() : void
+  +Draw() :void
 }
 
 interface MBRD::Fragments::IFragment {

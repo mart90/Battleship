@@ -83,6 +83,8 @@ namespace MBRD
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            PlayerController playerController = (PlayerController)Services.GetService(typeof(IPlayerService));
+
 
             // TODO: use this.Content to load your game content here
             LoadGame();
@@ -149,11 +151,14 @@ namespace MBRD
 
             if (gameState == GameState.Playing)
             {
-                foreach (Player player in _game.Players)
+                foreach (Player player in playerController.GetPlayers())
                 {
-                    var pos = _game.Players.IndexOf(player);
-                    player.Draw(Content, spriteBatch);
+                    if (player.IsActive)
+                    {
+                        player.Draw(Content, spriteBatch);
+                    }
                 }
+
             }
             
             spriteBatch.End();
