@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MBRD.Entities
+namespace MBRD
 {
     class FiringGrid : AbstractGrid
     {

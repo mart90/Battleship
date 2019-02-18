@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MBRD.Entities
+namespace MBRD
 {
     class MBRDGame
     {

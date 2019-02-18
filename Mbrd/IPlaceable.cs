@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MBRD.Entities
+namespace MBRD
 {
     public interface IPlaceable
     {

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
-using MBRD.Entities;
+using MBRD;
 
 namespace MegaBattleshipRoyaleDeluxe
 {

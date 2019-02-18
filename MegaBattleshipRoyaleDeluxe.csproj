@@ -41,23 +41,23 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Entities\Boats\AbstractBoat.cs" />
-    <Compile Include="Entities\Boats\AircraftCarrier.cs" />
-    <Compile Include="Entities\Boats\Battleship.cs" />
-    <Compile Include="Entities\Boats\Factory\BoatFactory.cs" />
-    <Compile Include="Entities\Boats\Factory\FleetFactory.cs" />
-    <Compile Include="Entities\Boats\Fleet.cs" />
-    <Compile Include="Entities\Boats\IBoat.cs" />
-    <Compile Include="Entities\Boats\Scout.cs" />
-    <Compile Include="Entities\Boats\Submarine.cs" />
-    <Compile Include="Entities\Fragments\BoatFragment.cs" />
-    <Compile Include="Entities\Fragments\WaterFragment.cs" />
-    <Compile Include="Entities\Game.cs" />
-    <Compile Include="Entities\Grid.cs" />
-    <Compile Include="Entities\Grids\BoatGrid.cs" />
-    <Compile Include="Entities\Grids\FiringGrid.cs" />
-    <Compile Include="Entities\IPlaceable.cs" />
-    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Mbrd\Boats\AbstractBoat.cs" />
+    <Compile Include="Mbrd\Boats\AircraftCarrier.cs" />
+    <Compile Include="Mbrd\Boats\Battleship.cs" />
+    <Compile Include="Mbrd\Boats\Factory\BoatFactory.cs" />
+    <Compile Include="Mbrd\Boats\Factory\FleetFactory.cs" />
+    <Compile Include="Mbrd\Boats\Fleet.cs" />
+    <Compile Include="Mbrd\Boats\IBoat.cs" />
+    <Compile Include="Mbrd\Boats\Scout.cs" />
+    <Compile Include="Mbrd\Boats\Submarine.cs" />
+    <Compile Include="Mbrd\Fragments\BoatFragment.cs" />
+    <Compile Include="Mbrd\Fragments\WaterFragment.cs" />
+    <Compile Include="Mbrd\Game.cs" />
+    <Compile Include="Mbrd\Grid.cs" />
+    <Compile Include="Mbrd\Grids\BoatGrid.cs" />
+    <Compile Include="Mbrd\Grids\FiringGrid.cs" />
+    <Compile Include="Mbrd\IPlaceable.cs" />
+    <Compile Include="Mbrd\Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
