@@ -74,11 +74,11 @@ namespace MBRD.Grids
             if (horizontal)
             {
                 //Past de boot hier uberhaupt?
-                if (!((startX + boat.length) <= Width))
+                if (!((startX + boat.Length) <= Width))
                     return false;
 
                 //Door alle grid-items loopen en kijken of er een boot ligt
-                for (int i = startX; i < (startX + boat.length); i++)
+                for (int i = startX; i < (startX + boat.Length); i++)
                 {
                     if (TileSet[startY][i] is BoatFragment)
                     {
@@ -91,11 +91,11 @@ namespace MBRD.Grids
             else
             {
                 //Past de boot hier uberhaupt?
-                if (!((startY + boat.length) <= Height))
+                if (!((startY + boat.Length) <= Height))
                     return false;
 
                 //Door alle grid-items loopen en kijken of er een boot ligt
-                for (int i = startY; i < (startY + boat.length); i++)
+                for (int i = startY; i < (startY + boat.Length); i++)
                 {
                     if (TileSet[i][startX] is BoatFragment)
                     {

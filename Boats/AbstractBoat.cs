@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace MBRD.Boats
 {
-    abstract class AbstractBoat
+    abstract class AbstractBoat : IBoat
     {
         protected List<BoatFragment> boatFragmentList;
 
-        public int length { get; set; }
-        public string frontImage { get; set; }
-        public string midImage { get; set; }
-        public string backImage { get; set; }
+        public int Length { get; set; }
+        public string FrontImage { get; set; }
+        public string MidImage { get; set; }
+        public string BackImage { get; set; }
 
         public AbstractBoat()
         {
@@ -20,7 +20,7 @@ namespace MBRD.Boats
 
         public void Create()
         {
-             for (int y = 0; y < length; y++)
+             for (int y = 0; y < Length; y++)
              {
                 boatFragmentList.Add(new BoatFragment());
              }
