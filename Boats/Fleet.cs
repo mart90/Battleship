@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MBRD.Boats
 {
     class Fleet
     {
-        private List<IBoat> boats;
+        private List<AbstractBoat> boats;
         
         public Fleet()
         {
-            boats = new List<IBoat>();
+            boats = new List<AbstractBoat>();
         }
 
-        public void Add(IBoat boat)
+        public void Add(AbstractBoat boat)
         {
             boats.Add(boat);
         }

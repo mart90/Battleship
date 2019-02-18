@@ -8,12 +8,11 @@ MBRD::Game1::GameState -right-> MBRD::GameState
 MBRD::MBRDGame --> MBRD::Player
 
 MBRD::Boats::Fleet <-- MBRD::Player 
-MBRD::Boats::AbstractBoat ..|> MBRD::Boats::IBoat
 MBRD::Boats::AircraftCarrier --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Battleship --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Scout --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Submarine --|> MBRD::Boats::AbstractBoat
-MBRD::Boats::Fleet::add .up.> MBRD::Boats::IBoat 
+MBRD::Boats::Fleet::add .up.> MBRD::Boats::AbstractBoat 
 
 MBRD::Boats::Factory::FleetFactory ..> MBRD::Boats::Fleet
 MBRD::Boats::Factory::FleetFactory -left-> MBRD::Boats::Factory::BoatFactory
@@ -60,19 +59,10 @@ class MBRD::Player {
 }
 
 class MBRD::Boats::Fleet {
-  -boats : List<IBoat>
+  -boats : List<AbstractBoat>
 
   +Fleet()
-  +Add(boat : IBoat) : void 
-}
-
-interface MBRD::Boats::IBoat {
-  +length : int 
-  +frontImage : string 
-  +midImage : string 
-  +backImage : string 
-
-  +Hit() : void 
+  +Add(boat : AbstractBoat) : void 
 }
 
 abstract class MBRD::Boats::AbstractBoat{

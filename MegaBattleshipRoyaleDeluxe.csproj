@@ -47,7 +47,6 @@
     <Compile Include="Boats\Factory\BoatFactory.cs" />
     <Compile Include="Boats\Factory\FleetFactory.cs" />
     <Compile Include="Boats\Fleet.cs" />
-    <Compile Include="Boats\IBoat.cs" />
     <Compile Include="Boats\Scout.cs" />
     <Compile Include="Boats\Submarine.cs" />
     <Compile Include="Fragments\BoatFragment.cs" />
