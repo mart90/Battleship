@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,7 +13,8 @@ namespace MBRD
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private MBRDGame _game = new MBRDGame();
+        private readonly MBRDGame _game;
+        private readonly ConfigManager config;
         
         private Texture2D startButton;
         private Texture2D exitButton;
@@ -24,24 +26,21 @@ namespace MBRD
         private Vector2 startButtonPosition;
         private Vector2 exitButtonPosition;
         private Vector2 resumeButtonPosition;
-
-        private const float OrbWidth = 50f;
-        private const float OrbHeight = 50f;
-        private float speed = 1.5f;
         
-        private bool isLoading = false;
+        private bool isLoading;
         MouseState mouseState;
         GameState gameState;
         MouseState previousMouseState;
-
-        const int TargetWidth = 1600;
-        const int TargetHeight = 1000;
         
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = TargetWidth;
-            graphics.PreferredBackBufferHeight = TargetHeight;
+            _game = new MBRDGame();
+            config = new ConfigManager("Config.ini");
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = int.Parse(config.Read("Width", "Window")),
+                PreferredBackBufferHeight = int.Parse(config.Read("Height", "Window"))
+            };
             Content.RootDirectory = "Content";
             
             graphics.ApplyChanges();
@@ -100,15 +99,7 @@ namespace MBRD
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 gameState = GameState.StartMenu;
-
-            // TODO: Add your update logic here
-            orbPosition.X += speed;
-
-            if (orbPosition.X > (GraphicsDevice.Viewport.Width - OrbWidth) || orbPosition.X < 0)
-            {
-                speed *= -1;
-            }
-
+            
             mouseState = Mouse.GetState();
             if (previousMouseState.LeftButton == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Released)
             {
