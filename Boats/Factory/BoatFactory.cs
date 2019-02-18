@@ -1,4 +1,5 @@
 ﻿using MBRD.Boats;
+using System;
 
 namespace MBRD.Boats.Factory
 {
@@ -12,6 +13,7 @@ namespace MBRD.Boats.Factory
             boat.MidImage = midImage;
             boat.BackImage = backImage;
 
+            Console.WriteLine("Generate Boat: {0}", boat);
             return (T)boat;
         }
 

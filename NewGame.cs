@@ -1,34 +1,29 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using MBRD.Boats.Factory;
 
 namespace MBRD
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class NewGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private MBRDGame _game = new MBRDGame();
-        
         private Texture2D startButton;
         private Texture2D exitButton;
         private Texture2D pauseButton;
         private Texture2D resumeButton;
         private Texture2D loadingScreen;
 
-        private Vector2 orbPosition;
         private Vector2 startButtonPosition;
         private Vector2 exitButtonPosition;
         private Vector2 resumeButtonPosition;
 
-        private const float OrbWidth = 50f;
-        private const float OrbHeight = 50f;
-        private float speed = 1.5f;
-        
         private bool isLoading = false;
         MouseState mouseState;
         GameState gameState;
@@ -36,14 +31,16 @@ namespace MBRD
 
         const int TargetWidth = 1600;
         const int TargetHeight = 1000;
-        
-        public Game1()
+        private List<Player> Players;
+
+        public NewGame()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = TargetWidth;
             graphics.PreferredBackBufferHeight = TargetHeight;
             Content.RootDirectory = "Content";
-            
+            Players = new List<Player>();
+
             graphics.ApplyChanges();
         }
 
@@ -55,10 +52,15 @@ namespace MBRD
         /// </summary>
         protected override void Initialize()
         {
-            _game.AddPlayer(new Player("player1", "red", 1));
-            _game.AddPlayer(new Player("player2", "blue", 2));
+            Players.Add(new Player("player1", "red", 1));
+            Players.Add(new Player("player2", "blue", 2));
 
-            _game.Initialize();
+            FleetFactory FleetFactory = new FleetFactory();
+
+            foreach (Player Player in Players)
+            {
+                Player.AddFleet(FleetFactory.GenerateFleet());
+            }
 
             //enable the mousepointer
             IsMouseVisible = true;
@@ -101,14 +103,6 @@ namespace MBRD
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 gameState = GameState.StartMenu;
 
-            // TODO: Add your update logic here
-            orbPosition.X += speed;
-
-            if (orbPosition.X > (GraphicsDevice.Viewport.Width - OrbWidth) || orbPosition.X < 0)
-            {
-                speed *= -1;
-            }
-
             mouseState = Mouse.GetState();
             if (previousMouseState.LeftButton == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Released)
             {
@@ -143,13 +137,13 @@ namespace MBRD
 
             if (gameState == GameState.Playing)
             {
-                foreach (Player player in _game.Players)
+                foreach (Player player in Players)
                 {
-                    var pos = _game.Players.IndexOf(player);
+                    var pos = Players.IndexOf(player);
                     player.Draw(Content, spriteBatch);
                 }
             }
-            
+
             spriteBatch.End();
 
             base.Draw(gameTime);
