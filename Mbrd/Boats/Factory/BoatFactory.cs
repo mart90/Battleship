@@ -1,4 +1,4 @@
-﻿namespace MBRD.Entities
+﻿namespace MBRD.Boats.Factory
 {
     class BoatFactory
     {

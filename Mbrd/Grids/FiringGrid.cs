@@ -1,6 +1,7 @@
 ﻿using System;
+using MBRD.Fragments;
 
-namespace MBRD.Entities
+namespace MBRD.Grids
 {
     class FiringGrid : AbstractGrid
     {
@@ -10,7 +11,7 @@ namespace MBRD.Entities
 
         public void Fired(int x, int y)
         {
-            IPlaceable target = TileSet[y][x];
+            IFragment target = TileSet[y][x];
             Console.WriteLine("SHOT FIRED ON (x:{0} y:{1})", x.ToString(), y.ToString());
 
             target.Hit = true;

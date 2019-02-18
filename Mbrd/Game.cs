@@ -1,13 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MBRD.Boats.Factory;
 
-namespace MBRD.Entities
+namespace MBRD
 {
     class MBRDGame
     {
@@ -17,7 +12,7 @@ namespace MBRD.Entities
         {
             Players = new List<Player>();
         }
-        
+
         /// <summary>
         /// Add a player to the game
         /// </summary>
@@ -26,7 +21,7 @@ namespace MBRD.Entities
         {
             Players.Add(Player);
         }
-        
+
         /// <summary>
         /// Setup game starting position, generate player fleet
         /// </summary>
@@ -34,7 +29,7 @@ namespace MBRD.Entities
         {
             GenerateFleet();
         }
-        
+
         private void GenerateFleet()
         {
             FleetFactory FleetFactory = new FleetFactory();
@@ -61,16 +56,20 @@ namespace MBRD.Entities
             {
                 for (int y = 0; y < Player.firingGrid.Width; y++)
                 {
-                    if(y == Player.firingGrid.Width - 1)
+                    if (y == Player.firingGrid.Width - 1)
                     {
                         if (Player.firingGrid.TileSet[y][x].Hit)
                         {
                             Debug.WriteLine("H ");
-                        } else {
+                        }
+                        else
+                        {
                             Debug.WriteLine("W ");
                         }
-                        
-                    } else {
+
+                    }
+                    else
+                    {
                         if (Player.firingGrid.TileSet[y][x].Hit)
                         {
                             Debug.Write("H ");
@@ -79,9 +78,9 @@ namespace MBRD.Entities
                         {
                             Debug.Write("W ");
                         }
-                        
+
                     }
-                    
+
                 }
             }
         }

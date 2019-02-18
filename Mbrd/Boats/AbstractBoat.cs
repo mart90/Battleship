@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace MBRD.Entities
+namespace MBRD.Boats
 {
     abstract class AbstractBoat : IBoat
     {

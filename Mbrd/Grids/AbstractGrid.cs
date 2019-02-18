@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using MBRD.Boats;
+using MBRD.Fragments;
 
-namespace MBRD.Entities
+namespace MBRD.Grids
 {
     public abstract class AbstractGrid
     {
@@ -13,7 +15,7 @@ namespace MBRD.Entities
         public int HorizontalOffset { get; set; }
         public int VerticalOffset { get; set; }
         public int TileSize { get; set; }
-        public List<List<IPlaceable>> TileSet { get; set; }
+        public List<List<IFragment>> TileSet { get; set; }
 
         private const int GridSpacing = 1;
         private const int PlayerGridSpacing = 10;
@@ -27,16 +29,16 @@ namespace MBRD.Entities
             VerticalOffset = verticalOffset + PlayerGridSpacing;
 
             SetupTiles();
-                        
+
             Console.WriteLine("Grid create with dimensions {0}x{1}", Width.ToString(), Height.ToString());
         }
 
         public void SetupTiles()
         {
-            TileSet = new List<List<IPlaceable>>();
-            for(int y = 0; y < Height; y++)
+            TileSet = new List<List<IFragment>>();
+            for (int y = 0; y < Height; y++)
             {
-                List<IPlaceable> row = new List<IPlaceable>();
+                List<IFragment> row = new List<IFragment>();
                 for (int x = 0; x < Width; x++)
                 {
                     row.Add(new WaterFragment()
@@ -51,9 +53,9 @@ namespace MBRD.Entities
 
         public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
         {
-            foreach (List<IPlaceable> placeables in TileSet)
+            foreach (List<IFragment> placeables in TileSet)
             {
-                foreach (IPlaceable placeable in placeables)
+                foreach (IFragment placeable in placeables)
                 {
                     placeable.Draw(contentManager, spriteBatch);
                 }
@@ -85,7 +87,8 @@ namespace MBRD.Entities
                 }
 
                 return true;
-            } else
+            }
+            else
             {
                 //Past de boot hier uberhaupt?
                 if (!((startY + boat.length) <= Height))

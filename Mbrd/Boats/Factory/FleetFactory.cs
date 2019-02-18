@@ -1,12 +1,17 @@
-﻿namespace MBRD.Entities
+﻿using MBRD.Boats;
+
+namespace MBRD.Boats.Factory
 {
+   
+
     class FleetFactory
     {
+        BoatFactory boatFactory = new BoatFactory();
+
         public Fleet GenerateFleet()
         {
             Fleet fleet = new Fleet();
-            BoatFactory boatFactory = new BoatFactory();
-            
+
             fleet.Add(boatFactory.GenerateDefaultAircraftCarrier());
 
             fleet.Add(boatFactory.GenerateDefaultBattleship());
