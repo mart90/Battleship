@@ -35,7 +35,6 @@ namespace MBRD
 
         public NewGame()
         {
-            _game = new MBRDGame();
             config = new ConfigManager("Config.ini");
             graphics = new GraphicsDeviceManager(this)
             {
