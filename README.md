@@ -6,3 +6,4 @@ Mega Battleship Royale Deluxe
 - PlantUml Language Service
 
 ## UML Class diagram
+https://github.com/mart90/Battleship/wiki/UML-Class-Diagram
