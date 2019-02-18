@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MBRD.Component;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +12,9 @@ namespace MBRD
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        PlayerController playerController;
+
 
         private MBRDGame _game = new MBRDGame();
         
@@ -55,10 +59,12 @@ namespace MBRD
         /// </summary>
         protected override void Initialize()
         {
-            _game.AddPlayer(new Player("player1", "red", 1));
-            _game.AddPlayer(new Player("player2", "blue", 2));
+            //_game.AddPlayer(new Player("player1", "red", 1));
+            //_game.AddPlayer(new Player("player2", "blue", 2));
+            //_game.Initialize();
 
-            _game.Initialize();
+            Components.Add(playerController = new PlayerController(this));
+            //Services.AddService(typeof(IPlayerService), playerController);
 
             //enable the mousepointer
             IsMouseVisible = true;

@@ -50,6 +50,7 @@
     <Compile Include="Boats\IBoat.cs" />
     <Compile Include="Boats\Scout.cs" />
     <Compile Include="Boats\Submarine.cs" />
+    <Compile Include="Component\PlayerController.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="Fragments\BoatFragment.cs" />
     <Compile Include="Fragments\WaterFragment.cs" />
