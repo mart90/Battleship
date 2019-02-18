@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MBRD
+namespace MBRD.Fragments
 {
-    class BoatFragment : IPlaceable
+    class BoatFragment : IFragment
     {
         public bool Hit { get; set; }
         public Rectangle Location { get; set; }

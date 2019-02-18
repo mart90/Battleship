@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MBRD
+namespace MBRD.Fragments
 {
-    public interface IPlaceable
+    public interface IFragment
     {
         Rectangle Location { get; set; }
         bool Hit { get; set; }

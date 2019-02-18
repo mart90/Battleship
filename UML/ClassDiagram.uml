@@ -15,25 +15,25 @@ MBRD::Boats::Scout --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Submarine --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Fleet::add .up.> MBRD::Boats::IBoat 
 
-MBRD::Boats::Factory::FleetFactory..> MBRD::Boats::Fleet
-MBRD::Boats::Factory::FleetFactory .left.> MBRD::Boats::Factory::BoatFactory
+MBRD::Boats::Factory::FleetFactory ..> MBRD::Boats::Fleet
+MBRD::Boats::Factory::FleetFactory -left-> MBRD::Boats::Factory::BoatFactory
 MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::AircraftCarrier 
 MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::Battleship 
 MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::Scout 
 MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::Submarine 
 
-MBRD::Fragments::BoatFrament ..|> MBRD::IPlaceable
-MBRD::Fragments::WaterFrament ..|> MBRD::IPlaceable
+MBRD::Fragments::BoatFrament ..|> MBRD::Fragments::IFragment
+MBRD::Fragments::WaterFrament ..|> MBRD::Fragments::IFragment
 
-MBRD::IPlaceable ..> Microsoft::Xna::Framework::Content::ContentManager
-MBRD::IPlaceable ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
+MBRD::Fragments::IFragment ..> Microsoft::Xna::Framework::Content::ContentManager
+MBRD::Fragments::IFragment .up.> Microsoft::Xna::Framework::Graphics::SpriteBatch
 
-MBRD::AbstractGrid ..> Microsoft::Xna::Framework::Content::ContentManager
-MBRD::AbstractGrid ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
-MBRD::AbstractGrid ..> MBRD::Boats::AbstractBoat
+MBRD::Grids::AbstractGrid ..> Microsoft::Xna::Framework::Content::ContentManager
+MBRD::Grids::AbstractGrid ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
+MBRD::Grids::AbstractGrid ..> MBRD::Boats::AbstractBoat
 
-MBRD::Grid::BoatGrid --|> MBRD::AbstractGrid
-MBRD::Grid::FiringGrid --|> MBRD::AbstractGrid
+MBRD::Grid::BoatGrid --|> MBRD::Grids::AbstractGrid
+MBRD::Grid::FiringGrid --|> MBRD::Grids::AbstractGrid
 
 class MBRD::MBRDGame {
   +Players : List<Player>
@@ -103,7 +103,7 @@ class MBRD::Boats::Factory::FleetFactory {
   +GenerateFleet() : Fleet 
 }
 
-abstract class MBRD::AbstractGrid {
+abstract class MBRD::Grids::AbstractGrid {
   +Width : int 
 
   +SetupTiles() : void
@@ -154,7 +154,7 @@ class MegaBattleshipRoyaleDeluxe::Game1 {
   #MouseClicked(x : int, y : int) : void
 }
 
-interface MBRD::IPlaceable {
+interface MBRD::Fragments::IFragment {
   +Hit : bool 
   +location : Rectangle 
 

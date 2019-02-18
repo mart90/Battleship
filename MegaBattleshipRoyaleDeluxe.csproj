@@ -53,10 +53,10 @@
     <Compile Include="Mbrd\Fragments\BoatFragment.cs" />
     <Compile Include="Mbrd\Fragments\WaterFragment.cs" />
     <Compile Include="Mbrd\Game.cs" />
-    <Compile Include="Mbrd\Grid.cs" />
+    <Compile Include="Mbrd\Grids\AbstractGrid.cs" />
     <Compile Include="Mbrd\Grids\BoatGrid.cs" />
     <Compile Include="Mbrd\Grids\FiringGrid.cs" />
-    <Compile Include="Mbrd\IPlaceable.cs" />
+    <Compile Include="Mbrd\Fragments\IFragment.cs" />
     <Compile Include="Mbrd\Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
