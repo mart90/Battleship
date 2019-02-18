@@ -39,14 +39,6 @@ namespace MBRD
         const int TargetWidth = 1600;
         const int TargetHeight = 1000;
         
-        enum GameState
-        {
-            StartMenu,
-            Loading,
-            Playing,
-            Paused
-        }
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);

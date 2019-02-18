@@ -49,6 +49,7 @@
     <Compile Include="Boats\Fleet.cs" />
     <Compile Include="Boats\Scout.cs" />
     <Compile Include="Boats\Submarine.cs" />
+    <Compile Include="Enumeration.cs" />
     <Compile Include="Fragments\BoatFragment.cs" />
     <Compile Include="Fragments\WaterFragment.cs" />
     <Compile Include="MBRDGame.cs" />
