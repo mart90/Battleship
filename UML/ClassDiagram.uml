@@ -2,11 +2,11 @@
 set namespaceSeparator ::
 scale max 1900 width
 
-MBRD::Game1 -up-|> Microsoft::Xna::Framework::Game
-MBRD::Game1 --> MBRD::MBRDGame 
-MBRD::Game1::GameState -right-> MBRD::GameState
-MBRD::MBRDGame --> MBRD::Player
-MBRD::MBRDGame --> MBRD::Boats::Factory::FleetFactory
+MBRD::NewGame -up-|> Microsoft::Xna::Framework::Game
+MBRD::NewGame::GameState -right-> MBRD::GameState
+MBRD::NewGame --> MBRD::Player
+MBRD::NewGame --> MBRD::ConfigManager
+MBRD::NewGame --> MBRD::Boats::Factory::FleetFactory
 MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
 MBRD::Boats::Fleet <-- MBRD::Player 
 MBRD::Boats::AircraftCarrier --|> MBRD::Boats::AbstractBoat
@@ -34,18 +34,6 @@ MBRD::Grids::AbstractGrid ..> MBRD::Boats::AbstractBoat
 
 MBRD::Grids::BoatGrid --|> MBRD::Grids::AbstractGrid
 MBRD::Grids::FiringGrid --|> MBRD::Grids::AbstractGrid
-
-class MBRD::MBRDGame {
-  +Players : List<Player>
-
-  +MBRDgame()
-  +AddPlayer() : void
-  +Initialize() : void
-  +GenerateFleet() : void
-  +Hit(int x, int y) : void
-  +ShowFiringGrid(Player Player) : void
-  +ShowBoatGrid(Player player) : void  
-}
 
 class MBRD::Player {
   +name : string 
@@ -121,10 +109,9 @@ class MBRD::Grids::FiringGrid {
   +Fired(x : int, y : int) : void
 }
 
-class MBRD::Game1 {
+class MBRD::NewGame {
   -graphics : GraphicsDeviceManager 
   -spriteBatch : SpriteBatch 
-  -_game : MBRDGame 
   -startButton : Texture2D 
   -exitButton : Texture2D 
   -pauseButton : Texture2D 
@@ -134,17 +121,13 @@ class MBRD::Game1 {
   -startButtonPosition : Vector2 
   -exitButtonPosition : Vector2 
   -resumeButtonPosition : Vector2 
-  -OrbWidth : float = 50f
-  -OrbHeight : float  = 50f
-  -speed : float = 1.5f
   -isLoading : bool = false
   -mouseState : MouseState 
   -gameState : GameState 
   -previousMouseState : MouseState 
-  -TargetWidth : int = 1600
-  -TargetHeight : int = 1000
+  +Players : List<Player>
 
-  +Game1()
+  +NewGame()
   #Initialize() : void
   #LoadContent() : void
   #UnloadContent : void
@@ -159,6 +142,20 @@ interface MBRD::Fragments::IFragment {
   +location : Rectangle 
 
   +Draw(ContentManager contentManager, SpriteBatch spriteBatch) : void
+}
+
+class MBRD::ConfigManager {
+  -String Path
+  -String EXE
+  
+  +extern long WritePrivateProfileString(string Section, string Key, string Value, string FilePath)
+  +extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath)
+  +ConfigManager(string IniPath = null)
+  +String Read(string Key, string Section = null)
+  +void Write(string Key, string Value, string Section = null)
+  +void DeleteKey(string Key, string Section = null)
+  +void DeleteSection(string Section = null)
+  +bool KeyExists(string Key, string Section = null)
 }
 
 class MBRD::Fragments::BoatFrament{
