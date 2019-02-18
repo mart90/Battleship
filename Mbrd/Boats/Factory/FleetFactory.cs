@@ -1,4 +1,6 @@
-﻿namespace MBRD
+﻿using MBRD.Boats;
+
+namespace MBRD.Boats.Factory
 {
     class FleetFactory
     {

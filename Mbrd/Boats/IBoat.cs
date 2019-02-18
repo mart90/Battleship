@@ -1,4 +1,4 @@
-﻿namespace MBRD
+﻿namespace MBRD.Boats
 {
     public interface IBoat
     {

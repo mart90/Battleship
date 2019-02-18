@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MBRD
+namespace MBRD.Boats
 {
     class AircraftCarrier : AbstractBoat
     {
