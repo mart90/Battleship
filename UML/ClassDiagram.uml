@@ -1,6 +1,6 @@
 ﻿@startuml
 set namespaceSeparator ::
-
+scale max 1900 width
 
 MBRD::Game1 -up-|> Microsoft::Xna::Framework::Game
 MBRD::Game1 --> MBRD::MBRDGame 
