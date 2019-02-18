@@ -30,6 +30,7 @@ namespace MBRD
         public void AddFleet(Fleet fleet)
         {
             this.fleet = fleet;
+            Console.WriteLine("Fleet added to player {0}", name);
         }
 
         private void SetupGrids()
@@ -39,6 +40,8 @@ namespace MBRD
 
             boatGrid = new BoatGrid(10, 10, 50, horizontalOffset, 0);
             firingGrid = new FiringGrid(10, 10, 50, horizontalOffset, 520);
+
+            Console.WriteLine("SetupGrids for player {0}", name);
         }
 
         public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
