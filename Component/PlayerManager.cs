@@ -15,12 +15,12 @@ namespace MBRD.Component
         List<Player> GetPlayers();
     }
 
-    class PlayerController : GameComponent, IPlayerService
+    class PlayerManager : GameComponent, IPlayerService
     {
         Game game;
         List<Player> players;
 
-        public PlayerController(Game game) : base(game)
+        public PlayerManager(Game game) : base(game)
         {
             this.game = game;
             players = new List<Player>();

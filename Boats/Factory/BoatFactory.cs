@@ -1,6 +1,4 @@
 ﻿using System;
-using MBRD.Boats;
-using System;
 
 namespace MBRD.Boats.Factory
 {
