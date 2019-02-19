@@ -97,12 +97,5 @@ namespace MBRD
             base.Draw(gameTime);
         }
 
-        protected void LoadGame()
-        {
-        }
-
-        protected void MouseClicked(int x, int y)
-        {
-        }
     }
 }
