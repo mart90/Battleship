@@ -2,10 +2,10 @@
 set namespaceSeparator ::
 scale max 1900 width
 
-MBRD::Game1 -down-|> Microsoft::Xna::Framework::Game
-MBRD::Game1 --> MBRD::Component::PlayerController 
-MBRD::Game1 --> MBRD::Component::GameController 
-MBRD::Game1::GameState -right-> MBRD::GameState
+MBRD::NewGame -down-|> Microsoft::Xna::Framework::Game
+MBRD::NewGame --> MBRD::Component::PlayerController 
+MBRD::NewGame --> MBRD::Component::GameController 
+MBRD::NewGame::GameState -right-> MBRD::GameState
 
 MBRD::Component::PlayerController ..|> MBRD::Component::IPlayerService
 MBRD::Component::PlayerController --> MBRD::Player
