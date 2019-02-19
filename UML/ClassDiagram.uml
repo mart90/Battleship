@@ -2,15 +2,16 @@
 set namespaceSeparator ::
 scale max 1900 width
 
-MBRD::Game1 -up-|> Microsoft::Xna::Framework::Game
-MBRD::Game1 --> MBRD::MBRDGame 
+MBRD::Game1 -down-|> Microsoft::Xna::Framework::Game
 MBRD::Game1 --> MBRD::Component::PlayerController 
+MBRD::Game1 --> MBRD::Component::GameController 
 MBRD::Game1::GameState -right-> MBRD::GameState
 
 MBRD::Component::PlayerController ..|> MBRD::Component::IPlayerService
+MBRD::Component::PlayerController --> MBRD::Player
+MBRD::Component::GameController --> MBRD::Component::PlayerController
+MBRD::Component::GameController --> MBRD::Boats::Factory::FleetFactory
 
-MBRD::MBRDGame --> MBRD::Player
-MBRD::MBRDGame --> MBRD::Boats::Factory::FleetFactory
 MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
 MBRD::Boats::Fleet <-- MBRD::Player 
 MBRD::Boats::AircraftCarrier --|> MBRD::Boats::AbstractBoat
@@ -38,18 +39,6 @@ MBRD::Grids::AbstractGrid ..> MBRD::Boats::AbstractBoat
 
 MBRD::Grids::BoatGrid --|> MBRD::Grids::AbstractGrid
 MBRD::Grids::FiringGrid --|> MBRD::Grids::AbstractGrid
-
-class MBRD::MBRDGame {
-  +Players : List<Player>
-
-  +MBRDgame()
-  +AddPlayer() : void
-  +Initialize() : void
-  +GenerateFleet() : void
-  +Hit(int x, int y) : void
-  +ShowFiringGrid(Player Player) : void
-  +ShowBoatGrid(Player player) : void  
-}
 
 class MBRD::Player {
   +name : string 
@@ -168,8 +157,18 @@ interface MBRD::Component::IPlayerService {
 class MBRD::Component::PlayerController {
   +IsActive : bool
 
+  +PlayerController(game : Game) : void
   +Initialize() : void
-  +Draw() :void
+  +Update() : void
+}
+
+class MBRD::Component::GameController {
+  +game:Game;
+  +FleetFactory : FleetFactory
+
+  +GameController(game : Game) : void
+  +Initialize() : void
+  +Update() : void
 }
 
 interface MBRD::Fragments::IFragment {

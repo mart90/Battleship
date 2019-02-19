@@ -50,11 +50,11 @@
     <Compile Include="Boats\IBoat.cs" />
     <Compile Include="Boats\Scout.cs" />
     <Compile Include="Boats\Submarine.cs" />
+    <Compile Include="Component\GameController.cs" />
     <Compile Include="Component\PlayerController.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="Fragments\BoatFragment.cs" />
     <Compile Include="Fragments\WaterFragment.cs" />
-    <Compile Include="MBRDGame.cs" />
     <Compile Include="Grids\AbstractGrid.cs" />
     <Compile Include="Grids\BoatGrid.cs" />
     <Compile Include="Grids\FiringGrid.cs" />

@@ -14,9 +14,7 @@ namespace MBRD
         SpriteBatch spriteBatch;
 
         PlayerController playerController;
-
-
-        private MBRDGame _game = new MBRDGame();
+        GameController gameController;
 
         private SpriteFont font;
         private Texture2D startButton;
@@ -62,12 +60,10 @@ namespace MBRD
         /// </summary>
         protected override void Initialize()
         {
-            //_game.AddPlayer(new Player("player1", "red", 1));
-            //_game.AddPlayer(new Player("player2", "blue", 2));
-            //_game.Initialize();
-
+            Components.Add(gameController = new GameController(this));
             Components.Add(playerController = new PlayerController(this));
-            //Services.AddService(typeof(IPlayerService), playerController);
+            
+            Services.AddService(typeof(IPlayerService), playerController);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
 
             //enable the mousepointer
