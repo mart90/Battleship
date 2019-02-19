@@ -3,14 +3,16 @@ set namespaceSeparator ::
 scale max 1900 width
 
 MBRD::NewGame -down-|> Microsoft::Xna::Framework::Game
-MBRD::NewGame --> MBRD::Component::PlayerController 
-MBRD::NewGame --> MBRD::Component::GameController 
+MBRD::NewGame --> MBRD::ConfigManager
 MBRD::NewGame::GameState -right-> MBRD::GameState
 
 MBRD::Component::PlayerController ..|> MBRD::Component::IPlayerService
 MBRD::Component::PlayerController --> MBRD::Player
+MBRD::Component::PlayerController ..> MBRD::NewGame
+
 MBRD::Component::GameController --> MBRD::Component::PlayerController
 MBRD::Component::GameController --> MBRD::Boats::Factory::FleetFactory
+MBRD::Component::GameController ..> MBRD::NewGame
 
 MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
 MBRD::Boats::Fleet <-- MBRD::Player 
@@ -42,8 +44,9 @@ MBRD::Grids::FiringGrid --|> MBRD::Grids::AbstractGrid
 
 class MBRD::Player {
   +name : string 
-  +color : string 
+  +color : Color 
   +order : int 
+  +IsActive : bool
   +boatGrid : BoatGrid 
   +firingGrid : FiringGrid 
   +fleet : Fleet
