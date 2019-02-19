@@ -21,7 +21,7 @@ namespace MBRD.Component
 
         public override void Initialize()
         {
-            PlayerController playerController = (PlayerController)game.Services.GetService(typeof(IPlayerService));
+            PlayerManager playerController = (PlayerManager)game.Services.GetService(typeof(IPlayerService));
 
             foreach (Player Player in playerController.GetPlayers())
             {
@@ -34,6 +34,11 @@ namespace MBRD.Component
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+        }
+
+        protected void changeTurn()
+        {
+
         }
     }
 }

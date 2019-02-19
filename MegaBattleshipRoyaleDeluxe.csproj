@@ -66,7 +66,10 @@
     <Compile Include="Boats\Scout.cs" />
     <Compile Include="Boats\Submarine.cs" />
     <Compile Include="Component\GameController.cs" />
-    <Compile Include="Component\PlayerController.cs" />
+    <Compile Include="Component\IStateService.cs" />
+    <Compile Include="Component\ScreenManager.cs" />
+    <Compile Include="Component\StateManager.cs" />
+    <Compile Include="Component\PlayerManager.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="Fragments\BoatFragment.cs" />
