@@ -16,7 +16,7 @@ namespace MBRD
         SpriteBatch spriteBatch;
 
         PlayerManager playerController;
-        GameController gameController;
+        GameManager gameController;
         StateManager stateManager;
         ScreenManager screenManager;
 
@@ -45,7 +45,7 @@ namespace MBRD
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Components.Add(gameController = new GameController(this));
+            Components.Add(gameController = new GameManager(this));
             Components.Add(playerController = new PlayerManager(this));
             Components.Add(stateManager = new StateManager(this));
             Components.Add(screenManager = new ScreenManager(this));

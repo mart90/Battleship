@@ -4,15 +4,22 @@ scale max 1900 width
 
 MBRD::NewGame -down-|> Microsoft::Xna::Framework::Game
 MBRD::NewGame --> MBRD::ConfigManager
-MBRD::NewGame::GameState -right-> MBRD::GameState
 
-MBRD::Component::PlayerController ..|> MBRD::Component::IPlayerService
-MBRD::Component::PlayerController --> MBRD::Player
-MBRD::Component::PlayerController ..> MBRD::NewGame
+MBRD::Component::PlayerManager .up.|> MBRD::Component::IPlayerService
+MBRD::Component::PlayerManager --> MBRD::Player
+MBRD::Component::PlayerManager ..> MBRD::NewGame
 
-MBRD::Component::GameController --> MBRD::Component::PlayerController
-MBRD::Component::GameController --> MBRD::Boats::Factory::FleetFactory
-MBRD::Component::GameController ..> MBRD::NewGame
+MBRD::Component::GameManager -right-> MBRD::Component::PlayerManager
+MBRD::Component::GameManager -left-> MBRD::Boats::Factory::FleetFactory
+MBRD::Component::GameManager ..> MBRD::NewGame
+
+MBRD::Component::StateManager ..> MBRD::NewGame
+MBRD::Component::StateManager .up.|> MBRD::Component::IStateService
+MBRD::Component::StateManager -right-> MBRD::GameState
+
+MBRD::Component::ScreenManager ..> MBRD::NewGame
+MBRD::Component::ScreenManager --> MBRD::Component::StateManager
+MBRD::Component::ScreenManager --> MBRD::Component::PlayerManager
 
 MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
 MBRD::Boats::Fleet <-- MBRD::Player 
@@ -120,27 +127,16 @@ class MBRD::Grids::FiringGrid {
 class MBRD::NewGame {
   -graphics : GraphicsDeviceManager 
   -spriteBatch : SpriteBatch 
-  -playerController : PlayerControlller
-  -_game : MBRDGame 
-  -startButton : Texture2D 
-  -exitButton : Texture2D 
-  -pauseButton : Texture2D 
-  -resumeButton : Texture2D 
-  -loadingScreen : Texture2D 
-  -orbPosition : Vector2 
-  -startButtonPosition : Vector2 
-  -exitButtonPosition : Vector2 
-  -resumeButtonPosition : Vector2 
-  -isLoading : bool = false
-  -mouseState : MouseState 
-  -gameState : GameState 
-  -previousMouseState : MouseState 
-  +Players : List<Player>
+  -PlayerManager : PlayerManager
+  -GameManager : GameManager 
+  -StateManager : StateManager
+  -ScreenManager : ScreenManager
+  -config : ConfigManager
 
-  +NewGame()
+  +NewGame() : void
   #Initialize() : void
   #LoadContent() : void
-  #UnloadContent : void
+  #UnloadContent() : void
   #Update(gameTime : GameTime) : void
   #Draw(gameTime : GameTime) : void
   #LoadGame() : void
@@ -153,7 +149,7 @@ interface MBRD::Component::IPlayerService {
     +GetPlayers() : List<Player>
 }
 
-class MBRD::Component::PlayerController {
+class MBRD::Component::PlayerManager {
   +IsActive : bool
 
   +PlayerController(game : Game) : void
@@ -161,13 +157,34 @@ class MBRD::Component::PlayerController {
   +Update() : void
 }
 
-class MBRD::Component::GameController {
-  +game:Game;
+class MBRD::Component::GameManager {
+  +Game : Game;
   +FleetFactory : FleetFactory
 
-  +GameController(game : Game) : void
+  +GameManager(Game : Game) : void
   +Initialize() : void
   +Update() : void
+}
+
+interface MBRD::Component::IStateService {
+    +ChangeState(GameState newState) : void
+    +GetCurrentState() : GameState
+}
+
+class MBRD::Component::StateManager {
+	-Game : Game
+	-GameState : GameState
+
+	+StateManager(Game : Game)
+}
+
+class MBRD::Component::ScreenManager {
+  -startButton : Texture2D 
+  -exitButton : Texture2D 
+  -startButtonPosition : Vector2 
+  -exitButtonPosition : Vector2 
+
+  +ScreenManager(Game : Game)
 }
 
 interface MBRD::Fragments::IFragment {

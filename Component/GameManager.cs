@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace MBRD.Component
 {
-    class GameController : GameComponent
+    class GameManager : GameComponent
     {
         Game game;
         FleetFactory FleetFactory = new FleetFactory();
 
-        public GameController(Game game) : base(game)
+        public GameManager(Game game) : base(game)
         {
             this.game = game;            
         }
