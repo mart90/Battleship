@@ -84,9 +84,6 @@ namespace MBRD
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             
-            PlayerController playerController = (PlayerController)Services.GetService(typeof(IPlayerService));
-
-
             // TODO: use this.Content to load your game content here
             LoadGame();
         }
