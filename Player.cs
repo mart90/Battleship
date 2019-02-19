@@ -1,5 +1,6 @@
 ﻿using MBRD.Boats;
 using MBRD.Grids;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,22 +10,24 @@ namespace MBRD
     class Player
     {
         public string name { get; set; }
-        public string color { get; set; }
+        public Color color { get; set; }
         public int order { get; set; }
+        public bool IsActive { get; set; }
         public BoatGrid boatGrid { get; set; }
         public FiringGrid firingGrid { get; set; }
         public Fleet fleet { get; set; }
 
 
-        public Player(string newName, string newColor, int playerOrder)
+        public Player(string newName, Color newColor, int playerOrder, bool active)
         {
             name = newName;
             color = newColor;
             order = playerOrder;
+            IsActive = active;
 
             SetupGrids();
 
-            Console.WriteLine("New player created with name {0} and color {1}", name, color);
+            Console.WriteLine("New player created with name {0} playing color {1} and isActive {2}", name, color, active);
         }
 
         public void AddFleet(Fleet fleet)
