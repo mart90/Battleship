@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MBRD.Component;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,6 +15,10 @@ namespace MBRD
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        PlayerController playerController;
+        GameController gameController;
+
+        private SpriteFont font;
         private readonly ConfigManager config;
         
         private Texture2D startButton;
@@ -45,6 +49,8 @@ namespace MBRD
             Players = new List<Player>();
 
             graphics.ApplyChanges();
+
+            spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         /// <summary>
@@ -55,15 +61,11 @@ namespace MBRD
         /// </summary>
         protected override void Initialize()
         {
-            Players.Add(new Player("player1", "red", 1));
-            Players.Add(new Player("player2", "blue", 2));
-
-            FleetFactory FleetFactory = new FleetFactory();
-
-            foreach (Player Player in Players)
-            {
-                Player.AddFleet(FleetFactory.GenerateFleet());
-            }
+            Components.Add(gameController = new GameController(this));
+            Components.Add(playerController = new PlayerController(this));
+            
+            Services.AddService(typeof(IPlayerService), playerController);
+            Services.AddService(typeof(SpriteBatch), spriteBatch);
 
             //enable the mousepointer
             IsMouseVisible = true;
@@ -81,7 +83,9 @@ namespace MBRD
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            PlayerController playerController = (PlayerController)Services.GetService(typeof(IPlayerService));
+
 
             // TODO: use this.Content to load your game content here
             LoadGame();
@@ -140,10 +144,13 @@ namespace MBRD
 
             if (gameState == GameState.Playing)
             {
-                foreach (Player player in Players)
+                foreach (Player player in playerController.GetPlayers())
                 {
-                    var pos = Players.IndexOf(player);
-                    player.Draw(Content, spriteBatch);
+                    if (player.IsActive)
+                    {
+                        player.Draw(Content, spriteBatch);
+                        spriteBatch.DrawString(font, player.name.ToString(), new Vector2(700, 10), Color.White);
+                    }
                 }
             }
 
@@ -157,6 +164,7 @@ namespace MBRD
             //load the buttonimages into the content pipeline
             startButton = Content.Load<Texture2D>(@"Start_BTN");
             exitButton = Content.Load<Texture2D>(@"Exit_BTN");
+            font = Content.Load<SpriteFont>("PlayerName");
 
             //set the position of the buttons
             startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 205, 100);
