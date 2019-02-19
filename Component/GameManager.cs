@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace MBRD.Component
 {
-    class GameController : GameComponent
+    class GameManager : GameComponent
     {
         Game game;
         FleetFactory FleetFactory = new FleetFactory();
 
-        public GameController(Game game) : base(game)
+        public GameManager(Game game) : base(game)
         {
             this.game = game;            
         }
 
         public override void Initialize()
         {
-            PlayerController playerController = (PlayerController)game.Services.GetService(typeof(IPlayerService));
+            PlayerManager playerController = (PlayerManager)game.Services.GetService(typeof(IPlayerService));
 
             foreach (Player Player in playerController.GetPlayers())
             {
@@ -34,6 +34,11 @@ namespace MBRD.Component
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+        }
+
+        protected void changeTurn()
+        {
+
         }
     }
 }
