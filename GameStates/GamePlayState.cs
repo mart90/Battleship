@@ -1,6 +1,8 @@
-﻿using MBRD.TileEngine;
+﻿using MBRD.Components;
+using MBRD.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -37,6 +39,12 @@ namespace MBRD.GameStates
         }
         public override void Update(GameTime gameTime)
         {
+            if (InputComponent.CheckKeyReleased(Keys.Escape))
+            {
+                InputComponent.FlushInput();
+                manager.ChangeState((MainMenuState)GameRef.StartMenuState, PlayerIndexInControl);
+            }
+                
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
