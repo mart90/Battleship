@@ -2,32 +2,20 @@
 set namespaceSeparator ::
 scale max 1900 width
 
-MBRD::NewGame -down-|> Microsoft::Xna::Framework::Game
-MBRD::NewGame --> MBRD::ConfigManager
+MBRD::NewGame --|> Microsoft::Xna::Framework::Game
+MBRD::NewGame --> MBRD::StateManager::GameStateManager
+MBRD::NewGame --> MBRD::GameStates::TitleIntroState
+MBRD::NewGame --> MBRD::GameStates::MainMenuState
+MBRD::NewGame --> MBRD::GameStates::GamePlayState
 
-MBRD::Component::PlayerManager .up.|> MBRD::Component::IPlayerService
-MBRD::Component::PlayerManager --> MBRD::Player
-MBRD::Component::PlayerManager ..> MBRD::NewGame
-
-MBRD::Component::GameManager -right-> MBRD::Component::PlayerManager
-MBRD::Component::GameManager -left-> MBRD::Boats::Factory::FleetFactory
-MBRD::Component::GameManager ..> MBRD::NewGame
-
-MBRD::Component::StateManager ..> MBRD::NewGame
-MBRD::Component::StateManager .up.|> MBRD::Component::IStateService
-MBRD::Component::StateManager -right-> MBRD::GameState
-
-MBRD::Component::ScreenManager ..> MBRD::NewGame
-MBRD::Component::ScreenManager --> MBRD::Component::StateManager
-MBRD::Component::ScreenManager --> MBRD::Component::PlayerManager
 
 MBRD::Boats::AbstractBoat --> MBRD::Boats::IBoat
-MBRD::Boats::Fleet <-- MBRD::Player 
 MBRD::Boats::AircraftCarrier --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Battleship --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Scout --|> MBRD::Boats::AbstractBoat
 MBRD::Boats::Submarine --|> MBRD::Boats::AbstractBoat
-MBRD::Boats::Fleet::add .up.> MBRD::Boats::AbstractBoat 
+MBRD::Boats::Fleet .up.> MBRD::Boats::AbstractBoat 
+
 
 MBRD::Boats::Factory::FleetFactory ..> MBRD::Boats::Fleet
 MBRD::Boats::Factory::FleetFactory -left-> MBRD::Boats::Factory::BoatFactory
@@ -36,187 +24,115 @@ MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::Battleship
 MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::Scout 
 MBRD::Boats::Factory::BoatFactory ..> MBRD::Boats::Submarine 
 
-MBRD::Fragments::BoatFrament ..|> MBRD::Fragments::IFragment
-MBRD::Fragments::WaterFrament ..|> MBRD::Fragments::IFragment
 
-MBRD::Fragments::IFragment ..> Microsoft::Xna::Framework::Content::ContentManager
-MBRD::Fragments::IFragment .up.> Microsoft::Xna::Framework::Graphics::SpriteBatch
+MBRD::StateManager::GameStateManager --|> MBRD::StateManager::IStateManager
+MBRD::StateManager::GameStateManager --|> Microsoft::Xna::Framework::GameComponent
+MBRD::StateManager::GameStateManager --> MBRD::GameStates::GameState
 
-MBRD::Grids::AbstractGrid ..> Microsoft::Xna::Framework::Content::ContentManager
-MBRD::Grids::AbstractGrid ..> Microsoft::Xna::Framework::Graphics::SpriteBatch
-MBRD::Grids::AbstractGrid ..> MBRD::Boats::AbstractBoat
 
-MBRD::Grids::BoatGrid --|> MBRD::Grids::AbstractGrid
-MBRD::Grids::FiringGrid --|> MBRD::Grids::AbstractGrid
+MBRD::GameStates::GameState ..|> MBRD::GameStates::IGameState
+MBRD::GameStates::GameState --|> Microsoft::Xna::Framework::DrawableGameComponent
 
-class MBRD::Player {
-  +name : string 
-  +color : Color 
-  +order : int 
-  +IsActive : bool
-  +boatGrid : BoatGrid 
-  +firingGrid : FiringGrid 
-  +fleet : Fleet
 
-  +Player(newName : string, newColor : string, playerOrder : int)
-  +addFleet(fleet : Fleet) : void 
+MBRD::GameStates::BaseGameState --|> MBRD::GameStates::GameState
+
+
+MBRD::GameStates::ITitleIntroState --|> MBRD::GameStates::IGameState
+MBRD::GameStates::TitleIntroState --|> MBRD::GameStates::BaseGameState
+MBRD::GameStates::TitleIntroState ..|> MBRD::GameStates::ITitleIntroState
+
+
+MBRD::GameStates::IMainMenuState --|> MBRD::GameStates::IGameState
+MBRD::GameStates::MainMenuState --|> MBRD::GameStates::BaseGameState
+MBRD::GameStates::MainMenuState ..|> MBRD::GameStates::IMainMenuState
+MBRD::GameStates::MainMenuState ..> MBRD::Component::InputComponent
+
+
+MBRD::GameStates::IGamePlayState --|> MBRD::GameStates::IGameState
+MBRD::GameStates::GamePlayState ..|> MBRD::GameStates::IGamePlayState
+MBRD::GameStates::GamePlayState --|> MBRD::GameStates::BaseGameState
+MBRD::GameStates::GamePlayState --> MBRD::Player
+MBRD::GameStates::GamePlayState --> MBRD::TileEngine::Engine
+
+MBRD::Component::MenuComponent --> MBRD::Component::InputComponent
+
+MBRD::TileEngine::Engine --> MBRD::TileEngine::TileMap
+MBRD::TileEngine::TileMap --> MBRD::TileEngine::TileLayer
+MBRD::TileEngine::TileMap --> MBRD::TileEngine::TileSet
+
+
+abstract class MBRD::GameStates::GameState {
 }
 
-class MBRD::Boats::Fleet {
-  -boats : List<AbstractBoat>
-
-  +Fleet()
-  +Add(boat : AbstractBoat) : void 
+interface MBRD::GameStates::ITitleIntroState {
 }
 
-interface MBRD::Boats::IBoat {
-  +length : int 
-  +frontImage : string 
-  +midImage : string 
-  +backImage : string 
-
-  +Hit() : void
+interface MBRD::GameStates::IGameState {
+	+Tag : GameState
+    +PlayerIndeInputComponentControl : PlayerIndex
 }
 
-abstract class MBRD::Boats::AbstractBoat{
-  +length : int 
-  +frontImage : string 
-  +midImage : string 
-  +backImage : string 
-
-  +AbstractBoat()
-  +Create() : void 
-  +{abstract} Hit() : void 
+interface MBRD::GameStates::IMainMenuState {
 }
 
-class MBRD::Boats::AircraftCarrier
-class MBRD::Boats::Battleship
-class MBRD::Boats::Scout
-class MBRD::Boats::Submarine
-
-class MBRD::Boats::Factory::BoatFactory {
-  +GenerateBoat(length : int, frontImage : string, midImage : string, backImage : string)
-  +GenerateDefaultAircraftCarrier() : AircraftCarrier 
-  +GenerateDefaultBattleship() : Battleship 
-  +GenerateDefaultSubmarine() : Submarine 
-  +GenerateDefaultScout() : Scout 
+interface MBRD::GameStates::IGamePlayState {
+	+SetUpNewGame() : void
+	+LoadExistingGame() : void
+	+StartGame() : void
 }
 
-class MBRD::Boats::Factory::FleetFactory {
-  +GenerateFleet() : Fleet 
+class MBRD::GameStates::BaseGameState {
 }
 
-abstract class MBRD::Grids::AbstractGrid {
-  +Width : int 
-
-  +SetupTiles() : void
-  +Draw(contentManager : ContentManager, spriteBatch : SpriteBatch)
-  +DoesItFit(boat : AbstractBoat, fragments : List<Tuple<int, int>>) : bool
-  +DoesItFit(boat : AbstractBoat, startX : int, startY : int, horizontal : bool) : bool
+class MBRD::GameStates::TitleIntroState {
 }
 
-class MBRD::Grids::BoatGrid {
-  +BoatGrid(width : int, height : int, tileSize : int, horizontalOffset : int, verticalOffset : int)
+class MBRD::GameStates::MainMenuState {
 }
 
-class MBRD::Grids::FiringGrid {
-  +FiringGrid(width : int, height : int, tileSize : int, horizontalOffset : int, verticalOffset : int)
-  +Fired(x : int, y : int) : void
+class MBRD::GameStates::GamePlayState {
+}
+
+class MBRD::Component::MenuComponent {
+}
+
+class MBRD::Component::InputComponent {
+}
+
+interface MBRD::StateManager::IStateManager {
+	+CurrentState() : GameState
+    +StateChanged : EventHandler;
+    -PushState(state: GameState, index : PlayerIndex) : void
+    -ChangeState(state :GameState, index : PlayerIndex) : void
+    -PopState() : void
+    -ContainsState(state : GameState) : bool 
+}
+
+class MBRD::StateManager::GameStateManager {
+	-gameStates : Stack<GameState> {readonly}
+    -startDrawOrder : int = 5000
+    -drawOrderInc : int = 50
+    -drawOrder : int
 }
 
 class MBRD::NewGame {
-  -graphics : GraphicsDeviceManager 
-  -spriteBatch : SpriteBatch 
-  -PlayerManager : PlayerManager
-  -GameManager : GameManager 
-  -StateManager : StateManager
-  -ScreenManager : ScreenManager
-  -config : ConfigManager
+	-graphics : GraphicsDeviceManager 
+	-spriteBatch : SpriteBatch 
+	-gameStateManager : GameStateManager
+	-titleIntroState : ITitleIntroState 
+	-screenRectangle : Rectangle
+	-config : ConfigManager
 
-  +NewGame() : void
-  #Initialize() : void
-  #LoadContent() : void
-  #UnloadContent() : void
-  #Update(gameTime : GameTime) : void
-  #Draw(gameTime : GameTime) : void
-  #LoadGame() : void
-  #MouseClicked(x : int, y : int) : void
+	+SpriteBatch() : SpriteBatch
+	+ScreenRectangle() : Rectangle
+	+NewGame() : void
+	#Initialize() : void
+	#LoadContent() : void
+	#UnloadContent() : void
+	#Update(gameTime : GameTime) : void
+	#Draw(gameTime : GameTime) : void
+	#LoadGame() : void
+	#MouseClicked(x : int, y : int) : void
 }
 
-interface MBRD::Component::IPlayerService {
-    +CreatePlayer(name : string, color : Color, order : int = 1, active : bool = true) : void
-    +GetActive() : Player
-    +GetPlayers() : List<Player>
-}
-
-class MBRD::Component::PlayerManager {
-  +IsActive : bool
-
-  +PlayerController(game : Game) : void
-  +Initialize() : void
-  +Update() : void
-}
-
-class MBRD::Component::GameManager {
-  +Game : Game;
-  +FleetFactory : FleetFactory
-
-  +GameManager(Game : Game) : void
-  +Initialize() : void
-  +Update() : void
-}
-
-interface MBRD::Component::IStateService {
-    +ChangeState(GameState newState) : void
-    +GetCurrentState() : GameState
-}
-
-class MBRD::Component::StateManager {
-	-Game : Game
-	-GameState : GameState
-
-	+StateManager(Game : Game)
-}
-
-class MBRD::Component::ScreenManager {
-  -startButton : Texture2D 
-  -exitButton : Texture2D 
-  -startButtonPosition : Vector2 
-  -exitButtonPosition : Vector2 
-
-  +ScreenManager(Game : Game)
-}
-
-interface MBRD::Fragments::IFragment {
-  +Hit : bool 
-  +location : Rectangle 
-
-  +Draw(ContentManager contentManager, SpriteBatch spriteBatch) : void
-}
-
-class MBRD::ConfigManager {
-  -String Path
-  -String EXE
-  
-  +extern long WritePrivateProfileString(string Section, string Key, string Value, string FilePath)
-  +extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath)
-  +ConfigManager(string IniPath = null)
-  +String Read(string Key, string Section = null)
-  +void Write(string Key, string Value, string Section = null)
-  +void DeleteKey(string Key, string Section = null)
-  +void DeleteSection(string Section = null)
-  +bool KeyExists(string Key, string Section = null)
-}
-
-class MBRD::Fragments::BoatFrament{
-}
-class MBRD::Fragments::WaterFrament {
-}
-
-enum MBRD::GameState {
- StartMenu
- Loading
- Playing
- Paused
-}
 @enduml

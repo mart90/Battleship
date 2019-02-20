@@ -25,7 +25,7 @@ namespace MBRD
             order = playerOrder;
             IsActive = active;
 
-            SetupGrids();
+            //SetupGrids();
 
             Console.WriteLine("New player created with name {0} playing color {1} and isActive {2}", name, color, active);
         }
@@ -49,8 +49,8 @@ namespace MBRD
 
         public void Draw(ContentManager contentManager, SpriteBatch spriteBatch)
         {
-            boatGrid.Draw(contentManager, spriteBatch);
-            firingGrid.Draw(contentManager, spriteBatch);
+            //boatGrid.Draw(contentManager, spriteBatch);
+            //firingGrid.Draw(contentManager, spriteBatch);
         }
     }    
 }

@@ -1,9 +1,9 @@
-﻿using MBRD.Component;
+﻿using MBRD.Components;
+using MBRD.GameStates;
+using MBRD.StateManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using MBRD.Boats.Factory;
 
 namespace MBRD
 {
@@ -15,24 +15,58 @@ namespace MBRD
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        PlayerManager playerController;
-        GameManager gameController;
-        StateManager stateManager;
-        ScreenManager screenManager;
+        GameStateManager gameStateManager;
+        ITitleIntroState titleIntroState;
+        IMainMenuState startMenuState;
+        IGamePlayState gamePlayState;
 
-        private readonly ConfigManager config;
-        
+        static Rectangle screenRectangle;
+        readonly ConfigManager config;
+
+        public SpriteBatch SpriteBatch
+        {
+            get { return spriteBatch; }
+        }
+
+        public static Rectangle ScreenRectangle
+        {
+            get { return screenRectangle; }
+        }
+
+        public ITitleIntroState TitleIntroState
+        {
+            get { return titleIntroState; }
+        }
+
+        public IMainMenuState StartMenuState
+        {
+            get { return startMenuState; }
+        }
+
+        public IGamePlayState GamePlayState
+        {
+            get { return gamePlayState; }
+        }
+
         public NewGame()
         {
             config = new ConfigManager("Config.ini");
-            graphics = new GraphicsDeviceManager(this)
-            {
-                PreferredBackBufferWidth = int.Parse(config.Read("Width", "Window")),
-                PreferredBackBufferHeight = int.Parse(config.Read("Height", "Window"))
-            };
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.ApplyChanges();
+            screenRectangle = new Rectangle(0, 0, 1280, 720);
+
+            graphics.PreferredBackBufferWidth = ScreenRectangle.Width;
+            graphics.PreferredBackBufferHeight = ScreenRectangle.Height;
+
+            gameStateManager = new GameStateManager(this);
+            Components.Add(gameStateManager);
+
+            titleIntroState = new TitleIntroState(this);
+            startMenuState = new MainMenuState(this);
+            gamePlayState = new GamePlayState(this);
+
+            gameStateManager.ChangeState((TitleIntroState)titleIntroState, PlayerIndex.One);
         }
 
         /// <summary>
@@ -43,19 +77,7 @@ namespace MBRD
         /// </summary>
         protected override void Initialize()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Components.Add(gameController = new GameManager(this));
-            Components.Add(playerController = new PlayerManager(this));
-            Components.Add(stateManager = new StateManager(this));
-            Components.Add(screenManager = new ScreenManager(this));
-
-            Services.AddService(typeof(IStateService), stateManager);
-            Services.AddService(typeof(IPlayerService), playerController);
-            Services.AddService(typeof(SpriteBatch), spriteBatch);
-
-            //enable the mousepointer
-            IsMouseVisible = true;
+            Components.Add(new InputComponent(this));
 
             base.Initialize();
         }
@@ -66,7 +88,8 @@ namespace MBRD
         /// </summary>
         protected override void LoadContent()
         {
-            base.LoadContent();
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //base.LoadContent();
         }
 
         /// <summary>
@@ -85,6 +108,9 @@ namespace MBRD
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
             base.Update(gameTime);
         }
 

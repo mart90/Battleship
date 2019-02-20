@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MBRD
 {
-    enum GameState
+    enum GameState_old
     {
         StartMenu,
         Loading,
