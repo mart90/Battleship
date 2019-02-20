@@ -46,7 +46,7 @@ namespace MBRD.GameStates
 
         protected override void LoadContent()
         {
-            background = content.Load<Texture2D>(@"GameScreens\titlescreen");
+            background = content.Load<Texture2D>(@"GameScreens\TitleScreenPirate");
             font = content.Load<SpriteFont>(@"Fonts\InterfaceFont");
 
             Vector2 size = font.MeasureString(message);

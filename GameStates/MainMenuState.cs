@@ -34,7 +34,7 @@ namespace MBRD.GameStates
         protected override void LoadContent()
         {
             spriteFont = Game.Content.Load<SpriteFont>(@"Fonts\InterfaceFont");
-            background = Game.Content.Load<Texture2D>(@"GameScreens\titlescreen");
+            background = Game.Content.Load<Texture2D>(@"GameScreens\TitleScreenPirate");
 
             Texture2D texture = Game.Content.Load<Texture2D>("wooden-button");
 
