@@ -20,9 +20,6 @@ namespace MBRD.GameStates
     public class GameSetupState : BaseGameState, IGameSetupState
     {
         Engine engine = new Engine(NewGame.ScreenRectangle, 32, 32);
-        TileMap BoatMap;
-        TileMap FiringMap;
-        
         SpriteFont spriteFont;
 
         public GameSetupState(Game game)
@@ -66,8 +63,9 @@ namespace MBRD.GameStates
 
             CreatePlayer("Player 1", Color.Blue, Set, 1, true);
             CreatePlayer("Player 2", Color.Red, Set, 2, false);
-            //volgende state "playing"
-            
+
+            PlayerIndexInControl = PlayerIndex.One;
+
         }
 
         public void LoadExistingGame()

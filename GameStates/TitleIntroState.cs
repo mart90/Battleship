@@ -57,13 +57,11 @@ namespace MBRD.GameStates
 
         public override void Update(GameTime gameTime)
         {
-            PlayerIndex? index = null;
-
             elapsed += gameTime.ElapsedGameTime;
 
             if (InputComponent.CheckKeyReleased(Keys.Space) || InputComponent.CheckKeyReleased(Keys.Enter) || InputComponent.CheckMouseReleased(MouseButtons.Left))
             {
-                manager.ChangeState((MainMenuState)GameRef.StartMenuState, index);
+                manager.ChangeState((MainMenuState)GameRef.StartMenuState, PlayerIndexInControl);
             }
 
             base.Update(gameTime);

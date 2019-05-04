@@ -19,13 +19,9 @@ namespace MBRD.GameStates
         protected ContentManager content;
         protected readonly List<GameComponent> childComponents;
 
-        protected PlayerIndex? indexInControl; //TODO remove this
+        public PlayerIndex? PlayerIndexInControl { get; set; }
 
-        public PlayerIndex? PlayerIndexInControl
-        {
-            get { return indexInControl; }
-            set { indexInControl = value; }
-        }
+        
 
         public List<GameComponent> Components
         {
