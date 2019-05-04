@@ -19,8 +19,9 @@ namespace MBRD.GameStates
 
     public class GamePlayState : BaseGameState, IGamePlayState
     {
-        Engine engine = new Engine(NewGame.ScreenRectangle, 64, 64);
-        TileMap map;
+        Engine engine = new Engine(NewGame.ScreenRectangle, 32, 32);
+        TileMap BoatMap;
+        TileMap FiringMap;
         List<Player> players = new List<Player>();
         SpriteFont spriteFont;
 
@@ -52,8 +53,11 @@ namespace MBRD.GameStates
             GameRef.GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
 
-            if (map != null)
-                map.Draw(gameTime, GameRef.SpriteBatch);
+            if (BoatMap != null)
+                BoatMap.Draw(gameTime, GameRef.SpriteBatch);
+
+            if (FiringMap != null)
+                FiringMap.Draw(gameTime, GameRef.SpriteBatch);
         }
 
         public void SetUpNewGame()
@@ -61,16 +65,24 @@ namespace MBRD.GameStates
             CreatePlayer("Player 1", Color.Blue, 1, true);
             CreatePlayer("Player 2", Color.Blue, 2, false);
 
-            Texture2D tiles = GameRef.Content.Load<Texture2D>(@"sea-sprite");
-            TileSet set = new TileSet(16, 16, 32, 32)
+            Texture2D Tiles = GameRef.Content.Load<Texture2D>(@"sea-sprite");
+            TileSet Set = new TileSet(16, 16, 32, 32)
             {
-                Texture = tiles
+                Texture = Tiles
             };
-            TileLayer sea = new TileLayer(100, 100, 22);
-            TileLayer boat = new TileLayer(100, 100, -1);
 
-            map = new TileMap(set, sea, boat, "player-map");
-            map.SetSeaTile(1, 1, 9);
+
+
+            //Boat stuff
+            TileLayer SeaLayer = new TileLayer(100, 100, 22);
+            TileLayer BoatLayer = new TileLayer(100, 100, -1);
+            
+            BoatMap = new TileMap(Set, SeaLayer, BoatLayer, "player-boat-map");
+
+            //fire stuff
+            TileLayer FiringLayer = new TileLayer(100, 100, 22, 350);
+            TileLayer ShotMarkingLayer = new TileLayer(100, 100, 4, 350);
+            FiringMap = new TileMap(Set, FiringLayer, ShotMarkingLayer, "player-firing-map");
         }
 
         public void LoadExistingGame()

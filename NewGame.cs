@@ -3,7 +3,6 @@ using MBRD.GameStates;
 using MBRD.StateManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace MBRD
 {
@@ -54,7 +53,7 @@ namespace MBRD
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            screenRectangle = new Rectangle(0, 0, 1280, 720);
+            screenRectangle = new Rectangle(0, 0, int.Parse(config.Read("Width", "Window")), int.Parse(config.Read("Height", "Window"))); 
 
             graphics.PreferredBackBufferWidth = ScreenRectangle.Width;
             graphics.PreferredBackBufferHeight = ScreenRectangle.Height;
@@ -78,6 +77,7 @@ namespace MBRD
         protected override void Initialize()
         {
             Components.Add(new InputComponent(this));
+            this.IsMouseVisible = true;
 
             base.Initialize();
         }

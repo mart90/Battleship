@@ -12,6 +12,7 @@ namespace MBRD.TileEngine
         int[] tiles;
         int width;
         int height;
+        int offset;
 
         Point min;
         Point max;
@@ -63,12 +64,13 @@ namespace MBRD.TileEngine
                 }
             }
         }
-        public TileLayer(int width, int height, int fill)
+        public TileLayer(int width, int height, int fill, int offset = 0)
         : this()
         {
             tiles = new int[height * width];
             this.width = width;
             this.height = height;
+            this.offset = offset;
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -126,12 +128,15 @@ namespace MBRD.TileEngine
                     tile = GetTile(x, y);
                     if (tile == -1)
                         continue;
-                    destination.X = x * Engine.TileWidth;
+                    destination.X = (x * Engine.TileWidth) + offset;
                     spriteBatch.Draw(
-                    tileSet.Texture,
-                    destination,
-                    tileSet.SourceRectangles[tile],
-                    Color.White);
+                        tileSet.Texture, //texture
+                        destination, //rect
+                        tileSet.SourceRectangles[tile],//rect
+                        Color.White //color
+                    );
+
+                   
                 }
             }
             spriteBatch.End();

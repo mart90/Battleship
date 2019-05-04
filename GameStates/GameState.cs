@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MBRD.StateManager;
+﻿using MBRD.StateManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using System;
+using System.Collections.Generic;
 
 namespace MBRD.GameStates
 {

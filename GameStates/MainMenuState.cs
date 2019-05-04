@@ -19,6 +19,7 @@ namespace MBRD.GameStates
         Texture2D background;
         SpriteFont spriteFont;
         MenuComponent menuComponent;
+        Rectangle backgroundDestination;
 
         public MainMenuState(Game game)
             : base(game)
@@ -28,6 +29,7 @@ namespace MBRD.GameStates
 
         public override void Initialize()
         {
+            backgroundDestination = NewGame.ScreenRectangle;
             base.Initialize();
         }
 
@@ -89,7 +91,7 @@ namespace MBRD.GameStates
         {
             GameRef.SpriteBatch.Begin();
 
-            GameRef.SpriteBatch.Draw(background, Vector2.Zero, Color.White);
+            GameRef.SpriteBatch.Draw(background, backgroundDestination, Color.White);
 
             GameRef.SpriteBatch.End();
 
