@@ -67,7 +67,7 @@ namespace MBRD.GameStates
             CreatePlayer("Player 1", Color.Blue, Set, 1, true);
             CreatePlayer("Player 2", Color.Red, Set, 2, false);
             //volgende state "playing"
-            manager.ChangeState((PlayerTurnState)GameRef.PlayerTurnState, PlayerIndexInControl);
+            
         }
 
         public void LoadExistingGame()
