@@ -61,14 +61,16 @@ namespace MBRD.GameStates
             CreatePlayer("Player 1", Color.Blue, 1, true);
             CreatePlayer("Player 2", Color.Blue, 2, false);
 
-            //Texture2D tiles = GameRef.Content.Load<Texture2D>(@"Sprites\WaterTiles\48");
             Texture2D tiles = GameRef.Content.Load<Texture2D>(@"sea-sprite");
-            TileSet set = new TileSet(16, 12, 32, 32);
-            set.Texture = tiles;
+            TileSet set = new TileSet(16, 16, 32, 32)
+            {
+                Texture = tiles
+            };
             TileLayer sea = new TileLayer(100, 100, 22);
             TileLayer boat = new TileLayer(100, 100, -1);
-            
+
             map = new TileMap(set, sea, boat, "player-map");
+            map.SetSeaTile(1, 1, 9);
         }
 
         public void LoadExistingGame()
