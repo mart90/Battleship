@@ -1,4 +1,7 @@
 ﻿using MBRD.Fragments;
+using MBRD.TileEngine;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 
@@ -30,6 +33,20 @@ namespace MBRD.Boats
         {
             throw new System.NotImplementedException();
         }
+
+        //public void Draw(SpriteBatch spriteBatch, TileSet tileSet)
+        //{
+        //    spriteBatch.Begin();
+
+        //    spriteBatch.Draw(
+        //        tileSet.Texture, //texture
+        //        destination, //rect
+        //        tileSet.SourceRectangles[tile],//rect
+        //        Color.White //color
+        //    );
+
+        //    spriteBatch.End();
+        //}
         
     }
 }

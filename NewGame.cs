@@ -19,7 +19,9 @@ namespace MBRD
         ITitleIntroState titleIntroState;
         IMainMenuState startMenuState;
         IGameSetupState gameSetupState;
+        IFleetSetupState fleetSetupState;
         IPlayerTurnState playerTurnState;
+
 
         public List<Player> players { get; set; } = new List<Player>();
 
@@ -52,6 +54,11 @@ namespace MBRD
             get { return gameSetupState; }
         }
 
+        public IFleetSetupState FleetSetupState
+        {
+            get { return fleetSetupState;  }
+        }
+
         public IPlayerTurnState PlayerTurnState
         {
             get { return playerTurnState; }
@@ -74,6 +81,7 @@ namespace MBRD
             titleIntroState = new TitleIntroState(this);
             startMenuState = new MainMenuState(this);
             gameSetupState = new GameSetupState(this);
+            fleetSetupState = new FleetSetupState(this);
             playerTurnState = new PlayerTurnState(this);
 
             gameStateManager.ChangeState((TitleIntroState)titleIntroState, PlayerIndex.One);

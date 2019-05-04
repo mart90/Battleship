@@ -62,7 +62,7 @@ namespace MBRD.GameStates
                     InputComponent.FlushInput();
                     GameRef.GamePlayState.SetUpNewGame();
                     GameRef.GamePlayState.StartGame();
-                    manager.ChangeState((PlayerTurnState)GameRef.PlayerTurnState, PlayerIndexInControl);
+                    manager.ChangeState((FleetSetupState)GameRef.FleetSetupState, PlayerIndexInControl);
                 }
                 else if (menuComponent.SelectedIndex == 1)
                 {

@@ -5,6 +5,12 @@ namespace MBRD.Boats
     public class Fleet
     {
         private List<AbstractBoat> boats;
+
+        public List<AbstractBoat> Boats
+        {
+            get { return boats; } 
+        }
+            
         
         public Fleet()
         {

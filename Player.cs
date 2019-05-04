@@ -44,16 +44,6 @@ namespace MBRD
             TileLayer BoatLayer = new TileLayer(200, 200, -1);
             boatGrid = new TileMap(SeaSet, BoatSet, SeaLayer, BoatLayer, "player-boat-map");
 
-            if(name == "Player 1")
-            {
-                boatGrid.SetBoatTile(0, 0, 1);
-                boatGrid.SetBoatTile(0, 1, 1);
-            } else
-            {
-                boatGrid.SetBoatTile(0, 0, 0);
-            }
-            
-
             //fire stuff
             TileLayer FiringLayer = new TileLayer(100, 100, 22, 500);
             TileLayer MarkingLayer = new TileLayer(100, 100, -1, 500);
