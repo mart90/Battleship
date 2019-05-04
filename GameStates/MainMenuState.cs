@@ -44,10 +44,11 @@ namespace MBRD.GameStates
 
             menuComponent = new MenuComponent(spriteFont, texture, menuItems);
 
-            Vector2 position = new Vector2();
-
-            position.Y = 90;
-            position.X = 1200 - menuComponent.Width;
+            Vector2 position = new Vector2
+            {
+                Y = 90,
+                X = 1200 - menuComponent.Width
+            };
 
             menuComponent.Postion = position;
 

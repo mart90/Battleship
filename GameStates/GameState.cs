@@ -19,7 +19,7 @@ namespace MBRD.GameStates
         protected ContentManager content;
         protected readonly List<GameComponent> childComponents;
 
-        protected PlayerIndex? indexInControl;
+        protected PlayerIndex? indexInControl; //TODO remove this
 
         public PlayerIndex? PlayerIndexInControl
         {
