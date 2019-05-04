@@ -89,17 +89,11 @@ namespace MBRD.GameStates
             GameRef.SpriteBatch.Begin();
 
             GameRef.SpriteBatch.Draw(background, backgroundDestination, Color.White);
-
-            GameRef.SpriteBatch.End();
-
-            base.Draw(gameTime);
-
-            GameRef.SpriteBatch.Begin();
-
             menuComponent.Draw(gameTime, GameRef.SpriteBatch);
 
             GameRef.SpriteBatch.End();
 
+            base.Draw(gameTime);
         }
 
     }
