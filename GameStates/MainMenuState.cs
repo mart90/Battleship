@@ -62,7 +62,6 @@ namespace MBRD.GameStates
                     InputComponent.FlushInput();
                     GameRef.GamePlayState.SetUpNewGame();
                     GameRef.GamePlayState.StartGame();
-                    //manager.PushState((GameSetupState)GameRef.GamePlayState, PlayerIndexInControl);
                     manager.ChangeState((PlayerTurnState)GameRef.PlayerTurnState, PlayerIndexInControl);
                 }
                 else if (menuComponent.SelectedIndex == 1)
