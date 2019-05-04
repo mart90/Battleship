@@ -70,9 +70,7 @@ namespace MBRD.GameStates
             {
                 Texture = Tiles
             };
-
-
-
+                       
             //Boat stuff
             TileLayer SeaLayer = new TileLayer(100, 100, 22);
             TileLayer BoatLayer = new TileLayer(100, 100, -1);
