@@ -65,14 +65,14 @@ namespace MBRD.GameStates
                     InputComponent.FlushInput();
                     GameRef.GamePlayState.SetUpNewGame();
                     GameRef.GamePlayState.StartGame();
-                    manager.PushState((GamePlayState)GameRef.GamePlayState, PlayerIndexInControl);
+                    manager.PushState((GameSetupState)GameRef.GamePlayState, PlayerIndexInControl);
                 }
                 else if (menuComponent.SelectedIndex == 1)
                 {
                     InputComponent.FlushInput();
                     GameRef.GamePlayState.LoadExistingGame();
                     GameRef.GamePlayState.StartGame();
-                    manager.PushState((GamePlayState)GameRef.GamePlayState, PlayerIndexInControl);
+                    manager.PushState((GameSetupState)GameRef.GamePlayState, PlayerIndexInControl);
                 }
                 else if (menuComponent.SelectedIndex == 2)
                 {

@@ -17,7 +17,7 @@ namespace MBRD
         GameStateManager gameStateManager;
         ITitleIntroState titleIntroState;
         IMainMenuState startMenuState;
-        IGamePlayState gamePlayState;
+        IGamePlayState GameSetupState;
 
         static Rectangle screenRectangle;
         readonly ConfigManager config;
@@ -44,7 +44,7 @@ namespace MBRD
 
         public IGamePlayState GamePlayState
         {
-            get { return gamePlayState; }
+            get { return GameSetupState; }
         }
 
         public NewGame()
@@ -63,7 +63,7 @@ namespace MBRD
 
             titleIntroState = new TitleIntroState(this);
             startMenuState = new MainMenuState(this);
-            gamePlayState = new GamePlayState(this);
+            GameSetupState = new GameSetupState(this);
 
             gameStateManager.ChangeState((TitleIntroState)titleIntroState, PlayerIndex.One);
         }

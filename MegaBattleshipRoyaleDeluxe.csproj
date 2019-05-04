@@ -72,7 +72,7 @@
     <Compile Include="Fragments\BoatFragment.cs" />
     <Compile Include="Fragments\WaterFragment.cs" />
     <Compile Include="GameStates\BaseGameState.cs" />
-    <Compile Include="GameStates\GamePlayState.cs" />
+    <Compile Include="GameStates\GameSetupState.cs" />
     <Compile Include="GameStates\MainMenuState.cs" />
     <Compile Include="GameStates\TitleIntroState.cs" />
     <Compile Include="Grids\AbstractGrid.cs" />
