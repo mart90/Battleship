@@ -2,7 +2,7 @@
 
 namespace MBRD.Boats
 {
-    class Fleet
+    public class Fleet
     {
         private List<AbstractBoat> boats;
         

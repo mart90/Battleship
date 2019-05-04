@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MBRD.TileEngine
 {
-    class TileSet
+    public class TileSet
     {
         #region Fields and Properties
         public int TilesWide = 8;

@@ -2,7 +2,7 @@
 
 namespace MBRD.Boats.Factory
 {
-    class BoatFactory
+    public class BoatFactory
     {
         public T GenerateBoat<T>(int length, string frontImage, string midImage, string backImage) where T : new()
         {

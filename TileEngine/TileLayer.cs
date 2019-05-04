@@ -5,7 +5,7 @@ using System;
 
 namespace MBRD.TileEngine
 {
-    class TileLayer
+    public class TileLayer
     {
         #region Field Region
         [ContentSerializer(CollectionItemName = "Tiles")]

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MBRD.Boats
 {
-    abstract class AbstractBoat : IBoat
+    public abstract class AbstractBoat : IBoat
     {
         protected List<BoatFragment> boatFragmentList;
 

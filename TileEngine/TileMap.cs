@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MBRD.TileEngine
 {
-    class TileMap
+    public class TileMap
     {
         #region Field Region
         string mapName;

@@ -2,7 +2,7 @@
 
 namespace MBRD.Boats
 {
-    class Scout : AbstractBoat
+    public class Scout : AbstractBoat
     {
         
     }

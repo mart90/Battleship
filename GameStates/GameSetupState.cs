@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace MBRD.GameStates
 {
-    public interface IGamePlayState
+    public interface IGameSetupState
     {
         void SetUpNewGame();
 
@@ -17,18 +17,18 @@ namespace MBRD.GameStates
         void StartGame();
     }
 
-    public class GameSetupState : BaseGameState, IGamePlayState
+    public class GameSetupState : BaseGameState, IGameSetupState
     {
         Engine engine = new Engine(NewGame.ScreenRectangle, 32, 32);
         TileMap BoatMap;
         TileMap FiringMap;
-        List<Player> Players = new List<Player>();
+        
         SpriteFont spriteFont;
 
         public GameSetupState(Game game)
         : base(game)
         {
-            game.Services.AddService(typeof(IGamePlayState), this);
+            game.Services.AddService(typeof(IGameSetupState), this);
         }
         public override void Initialize()
         {
@@ -53,35 +53,21 @@ namespace MBRD.GameStates
             GameRef.GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
 
-            if (BoatMap != null)
-                BoatMap.Draw(gameTime, GameRef.SpriteBatch);
-
-            if (FiringMap != null)
-                FiringMap.Draw(gameTime, GameRef.SpriteBatch);
+            
         }
 
         public void SetUpNewGame()
         {
-            CreatePlayer("Player 1", Color.Blue, 1, true);
-            CreatePlayer("Player 2", Color.Blue, 2, false);
-
             Texture2D Tiles = GameRef.Content.Load<Texture2D>(@"sea-sprite");
             TileSet Set = new TileSet(16, 16, 32, 32)
             {
                 Texture = Tiles
             };
-                       
-            //Boat stuff
-            TileLayer SeaLayer = new TileLayer(100, 100, 22);
-            TileLayer BoatLayer = new TileLayer(100, 100, -1);
-            BoatMap = new TileMap(Set, SeaLayer, BoatLayer, "player-boat-map");
 
-            //fire stuff
-            TileLayer FiringLayer = new TileLayer(100, 100, 22, 350);
-            TileLayer MarkingLayer = new TileLayer(100, 100, -1, 350);
-            FiringMap = new TileMap(Set, FiringLayer, MarkingLayer, "player-firing-map");
-
+            CreatePlayer("Player 1", Color.Blue, Set, 1, true);
+            CreatePlayer("Player 2", Color.Red, Set, 2, false);
             //volgende state "playing"
+            manager.ChangeState((PlayerTurnState)GameRef.PlayerTurnState, PlayerIndexInControl);
         }
 
         public void LoadExistingGame()
@@ -93,9 +79,9 @@ namespace MBRD.GameStates
         {
         }
 
-        public void CreatePlayer(string name, Color color, int order = 1, bool active = true)
-        {
-            Players.Add(new Player(name, color, order, active));
+        public void CreatePlayer(string name, Color color, TileSet Set, int order = 1, bool active = true)
+        {       
+            GameRef.players.Add(new Player(name, color, order, active, Set));
         }
     }
 

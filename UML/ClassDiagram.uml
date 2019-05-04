@@ -61,7 +61,7 @@ MBRD::TileEngine::TileMap --> MBRD::TileEngine::TileLayer
 MBRD::TileEngine::TileMap --> MBRD::TileEngine::TileSet
 
 
-abstract class MBRD::GameStates::GameState {
+abstract public class MBRD::GameStates::GameState {
 }
 
 interface MBRD::GameStates::ITitleIntroState {
@@ -81,22 +81,22 @@ interface MBRD::GameStates::IGamePlayState {
 	+StartGame() : void
 }
 
-class MBRD::GameStates::BaseGameState {
+public class MBRD::GameStates::BaseGameState {
 }
 
-class MBRD::GameStates::TitleIntroState {
+public class MBRD::GameStates::TitleIntroState {
 }
 
-class MBRD::GameStates::MainMenuState {
+public class MBRD::GameStates::MainMenuState {
 }
 
-class MBRD::GameStates::GamePlayState {
+public class MBRD::GameStates::GamePlayState {
 }
 
-class MBRD::Component::MenuComponent {
+public class MBRD::Component::MenuComponent {
 }
 
-class MBRD::Component::InputComponent {
+public class MBRD::Component::InputComponent {
 }
 
 interface MBRD::StateManager::IStateManager {
@@ -108,14 +108,14 @@ interface MBRD::StateManager::IStateManager {
     -ContainsState(state : GameState) : bool 
 }
 
-class MBRD::StateManager::GameStateManager {
+public class MBRD::StateManager::GameStateManager {
 	-gameStates : Stack<GameState> {readonly}
     -startDrawOrder : int = 5000
     -drawOrderInc : int = 50
     -drawOrder : int
 }
 
-class MBRD::NewGame {
+public class MBRD::NewGame {
 	-graphics : GraphicsDeviceManager 
 	-spriteBatch : SpriteBatch 
 	-gameStateManager : GameStateManager

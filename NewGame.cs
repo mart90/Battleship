@@ -3,6 +3,7 @@ using MBRD.GameStates;
 using MBRD.StateManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace MBRD
 {
@@ -17,7 +18,11 @@ namespace MBRD
         GameStateManager gameStateManager;
         ITitleIntroState titleIntroState;
         IMainMenuState startMenuState;
-        IGamePlayState GameSetupState;
+        IGameSetupState gameSetupState;
+        IPlayerTurnState playerTurnState;
+
+        public List<Player> players { get; set; } = new List<Player>();
+
 
         static Rectangle screenRectangle;
         readonly ConfigManager config;
@@ -42,9 +47,14 @@ namespace MBRD
             get { return startMenuState; }
         }
 
-        public IGamePlayState GamePlayState
+        public IGameSetupState GamePlayState
         {
-            get { return GameSetupState; }
+            get { return gameSetupState; }
+        }
+
+        public IPlayerTurnState PlayerTurnState
+        {
+            get { return playerTurnState; }
         }
 
         public NewGame()
@@ -63,7 +73,8 @@ namespace MBRD
 
             titleIntroState = new TitleIntroState(this);
             startMenuState = new MainMenuState(this);
-            GameSetupState = new GameSetupState(this);
+            gameSetupState = new GameSetupState(this);
+            playerTurnState = new PlayerTurnState(this);
 
             gameStateManager.ChangeState((TitleIntroState)titleIntroState, PlayerIndex.One);
         }

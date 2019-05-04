@@ -4,7 +4,7 @@ namespace MBRD.Boats.Factory
 {
    
 
-    class FleetFactory
+    public class FleetFactory
     {
         BoatFactory boatFactory = new BoatFactory();
 

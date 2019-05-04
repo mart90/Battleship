@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MBRD.Fragments
 {
-    class WaterFragment : IFragment
+    public class WaterFragment : IFragment
     {
         public bool Hit { get; set; }
         public Rectangle Location { get; set; }

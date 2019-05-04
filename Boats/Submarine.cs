@@ -1,6 +1,6 @@
 ﻿namespace MBRD.Boats
 {
-    class Submarine : AbstractBoat
+    public class Submarine : AbstractBoat
     {
     }
 }

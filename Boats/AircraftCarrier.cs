@@ -2,7 +2,7 @@
 
 namespace MBRD.Boats
 {
-    class AircraftCarrier : AbstractBoat
+    public class AircraftCarrier : AbstractBoat
     {
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MBRD.Boats;
 using MBRD.Grids;
+using MBRD.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,25 +8,26 @@ using System;
 
 namespace MBRD
 {
-    class Player
+    public class Player
     {
         public string name { get; set; }
         public Color color { get; set; }
         public int order { get; set; }
         public bool IsActive { get; set; }
-        public BoatGrid boatGrid { get; set; }
-        public FiringGrid firingGrid { get; set; }
+        public TileMap boatGrid { get; set; }
+        public TileMap firingGrid { get; set; }
         public Fleet fleet { get; set; }
 
 
-        public Player(string newName, Color newColor, int playerOrder, bool active)
+
+        public Player(string newName, Color newColor, int playerOrder, bool active, TileSet Set)
         {
             name = newName;
             color = newColor;
             order = playerOrder;
             IsActive = active;
 
-            //SetupGrids();
+            SetupGrids(Set);
 
             Console.WriteLine("New player created with name {0} playing color {1} and isActive {2}", name, color, active);
         }
@@ -36,14 +38,19 @@ namespace MBRD
             Console.WriteLine("Fleet added to player {0}", name);
         }
 
-        private void SetupGrids()
+        private void SetupGrids(TileSet Set)
         {
+            
+            //Boat stuff
+            TileLayer SeaLayer = new TileLayer(100, 100, 22);
+            TileLayer BoatLayer = new TileLayer(100, 100, -1);
+            boatGrid = new TileMap(Set, SeaLayer, BoatLayer, "player-boat-map");
 
-            int horizontalOffset = (order == 1) ? 0 : 520;
-
-            boatGrid = new BoatGrid(10, 10, 50, horizontalOffset, 0);
-            firingGrid = new FiringGrid(10, 10, 50, horizontalOffset, 520);
-
+            //fire stuff
+            TileLayer FiringLayer = new TileLayer(100, 100, 22, 350);
+            TileLayer MarkingLayer = new TileLayer(100, 100, -1, 350);
+            firingGrid = new TileMap(Set, FiringLayer, MarkingLayer, "player-firing-map");
+                       
             Console.WriteLine("SetupGrids for player {0}", name);
         }
 

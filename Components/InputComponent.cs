@@ -10,7 +10,7 @@ namespace MBRD.Components
         Center
     }
 
-    public class InputComponent : GameComponent
+   public class InputComponent : GameComponent
     {
         private static KeyboardState currentKeyboardState = Keyboard.GetState();
         private static KeyboardState previousKeyboardState = Keyboard.GetState();

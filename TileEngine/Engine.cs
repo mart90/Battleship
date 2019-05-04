@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MBRD.TileEngine
 {
-    class Engine
+    public class Engine
     {
         #region Fields
         private static Rectangle viewPortRectangle;
