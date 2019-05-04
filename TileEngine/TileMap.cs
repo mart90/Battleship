@@ -17,9 +17,10 @@ namespace MBRD.TileEngine
         int mapWidth;
         [ContentSerializer]
         int mapHeight;
-        TileSet tileSet;
+        TileSet seaTileSet;
+        TileSet boatTileSet;
         #endregion
-        
+
         #region Property Region
         [ContentSerializer]
         public string MapName
@@ -28,11 +29,18 @@ namespace MBRD.TileEngine
             private set { mapName = value; }
         }
         [ContentSerializer]
-        public TileSet TileSet
+        public TileSet SeaTileSet
         {
-            get { return tileSet; }
-            set { tileSet = value; }
+            get { return seaTileSet; }
+            set { seaTileSet = value; }
         }
+        [ContentSerializer]
+        public TileSet BoatTileSet
+        {
+            get { return boatTileSet; }
+            set { boatTileSet = value; }
+        }
+
         [ContentSerializer]
         public TileLayer SeaLayer
         {
@@ -73,14 +81,15 @@ namespace MBRD.TileEngine
         private TileMap()
         {
         }
-        private TileMap(TileSet tileSet, string mapName)
+        private TileMap(TileSet seaTileSet, TileSet boatTileSet, string mapName)
         {
             this.characters = new Dictionary<string, Point>();
-            this.tileSet = tileSet;
+            this.seaTileSet = seaTileSet;
+            this.boatTileSet = boatTileSet;
             this.mapName = mapName;
         }
-        public TileMap(TileSet tileSet, TileLayer seaLayer, TileLayer boatLayer, string mapName)
-        : this(tileSet, mapName)
+        public TileMap(TileSet seaTileSet, TileSet boatTileSet, TileLayer seaLayer, TileLayer boatLayer, string mapName)
+        : this(seaTileSet, boatTileSet, mapName)
         {
             this.seaLayer = seaLayer;
             this.boatLayer = boatLayer;
@@ -97,7 +106,16 @@ namespace MBRD.TileEngine
         {
             return seaLayer.GetTile(x, y);
         }
-        
+
+        public void SetBoatTile(int x, int y, int index)
+        {
+            boatLayer.SetTile(x, y, index);
+        }
+        public int GetBoatTile(int x, int y)
+        {
+            return boatLayer.GetTile(x, y);
+        }
+
         public void Update(GameTime gameTime)
         {
             if (seaLayer != null)
@@ -108,9 +126,9 @@ namespace MBRD.TileEngine
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (seaLayer != null)
-                seaLayer.Draw(gameTime, spriteBatch, tileSet);
+                seaLayer.Draw(gameTime, spriteBatch, seaTileSet);
             if (boatLayer != null)
-                boatLayer.Draw(gameTime, spriteBatch, tileSet);
+                boatLayer.Draw(gameTime, spriteBatch, boatTileSet);
         }
         #endregion
     }

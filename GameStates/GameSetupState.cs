@@ -1,4 +1,5 @@
-﻿using MBRD.Components;
+﻿using MBRD.Boats.Factory;
+using MBRD.Components;
 using MBRD.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -55,14 +56,20 @@ namespace MBRD.GameStates
 
         public void SetUpNewGame()
         {
-            Texture2D Tiles = GameRef.Content.Load<Texture2D>(@"sea-sprite");
-            TileSet Set = new TileSet(16, 16, 32, 32)
+            Texture2D SeaTiles = GameRef.Content.Load<Texture2D>(@"sea-sprite");
+            TileSet SeaSet = new TileSet(16, 16, 32, 32)
             {
-                Texture = Tiles
+                Texture = SeaTiles
             };
 
-            CreatePlayer("Player 1", Color.Blue, Set, 1, true);
-            CreatePlayer("Player 2", Color.Red, Set, 2, false);
+            Texture2D BoatTiles = GameRef.Content.Load<Texture2D>(@"sprites/iets");
+            TileSet BoatSet = new TileSet(16, 16, 32, 32)
+            {
+                Texture = BoatTiles
+            };
+
+            CreatePlayer("Player 1", Color.Blue, SeaSet, BoatSet, 1, true);
+            CreatePlayer("Player 2", Color.Red, SeaSet, BoatSet, 2, false);
 
             PlayerIndexInControl = PlayerIndex.One;
 
@@ -77,9 +84,12 @@ namespace MBRD.GameStates
         {
         }
 
-        public void CreatePlayer(string name, Color color, TileSet Set, int order = 1, bool active = true)
-        {       
-            GameRef.players.Add(new Player(name, color, order, active, Set));
+        public void CreatePlayer(string name, Color color, TileSet SeaSet, TileSet BoatSet, int order = 1, bool active = true)
+        {
+            var player = new Player(name, color, order, active, SeaSet, BoatSet);
+            player.AddFleet(FleetFactory.GenerateFleet());
+
+            GameRef.players.Add(player);
         }
     }
 

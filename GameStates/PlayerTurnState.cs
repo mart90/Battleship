@@ -31,6 +31,12 @@ namespace MBRD.GameStates
                 Console.WriteLine("Change turn to player : {0}", PlayerIndexInControl);
             }
 
+            if (InputComponent.CheckKeyReleased(Keys.Escape))
+            {
+                InputComponent.FlushInput();
+                manager.ChangeState((MainMenuState)GameRef.StartMenuState, PlayerIndexInControl);
+            }
+
             base.Update(gameTime);
         }
 

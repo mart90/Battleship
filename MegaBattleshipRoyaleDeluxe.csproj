@@ -76,9 +76,6 @@
     <Compile Include="GameStates\MainMenuState.cs" />
     <Compile Include="GameStates\PlayerTurnState.cs" />
     <Compile Include="GameStates\TitleIntroState.cs" />
-    <Compile Include="Grids\AbstractGrid.cs" />
-    <Compile Include="Grids\BoatGrid.cs" />
-    <Compile Include="Grids\FiringGrid.cs" />
     <Compile Include="Fragments\IFragment.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="NewGame.cs" />
